@@ -26,15 +26,16 @@ router.post('/createuser', async function (req, res) {
   }
 });
 
-router.get('/confirmation/:token', async (req, res) => {
+router.get('/confirmation/:token', (req, res) => {
   const EMAIL_SECRET = 'asdf1093KMnzxcvnkljvasdu09123nlasdasdf';
-  console.log(req);
   try {
-    const {
-      user: { email },
-    } = jwt.verify(req.params.token, EMAIL_SECRET);
-    console.log(email);
-    await handler.updateUser({ email: 'morten@iba.dk' }, { activated: true });
+    const verifiedEmail = jwt.verify(req.params.token, EMAIL_SECRET);
+    handler.updateUser(
+      req,
+      res,
+      { email: verifiedEmail.user },
+      { $set: { activated: true } }
+    );
   } catch (e) {
     res.send('err');
     console.log(e);
