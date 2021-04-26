@@ -7,6 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var yaddasRouter = require('./routes/yaddas');
+require('dotenv').config();
+const nodemailer = require('nodemailer');
+const cors = require('cors');
 
 var app = express();
 
@@ -38,5 +41,8 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(cors('*'));
+//app.use(transporter);
 
 module.exports = app;
