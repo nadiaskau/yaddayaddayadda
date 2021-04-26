@@ -1,7 +1,9 @@
 var express = require('express');
 const { models } = require('mongoose');
+require('dotenv').config();
 var router = express.Router();
 const handler = require('../models/user/userHandler');
+const jwt = require('jsonwebtoken');
 
 /* GET users listing. */
 router.get('/createuser', function (req, res, next) {
@@ -25,16 +27,20 @@ router.post('/createuser', async function (req, res) {
 });
 
 router.get('/confirmation/:token', async (req, res) => {
+  const EMAIL_SECRET = 'asdf1093KMnzxcvnkljvasdu09123nlasdasdf';
+  console.log(req);
   try {
     const {
       user: { email },
     } = jwt.verify(req.params.token, EMAIL_SECRET);
-    await handler.updateUser({ activated: true }, { where: { email } });
+    console.log(email);
+    await handler.updateUser({ email: 'morten@iba.dk' }, { activated: true });
   } catch (e) {
-    res.send('error');
+    res.send('err');
+    console.log(e);
   }
 
-  return res.redirect('http://localhost:3000');
+  return res.redirect('http://localhost:3000/');
 });
 
 module.exports = router;

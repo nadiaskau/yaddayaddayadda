@@ -15,14 +15,15 @@ exports.createUser = async function (req, res) {
 
   let saved = await mongooseWrap.save(user);
   if (saved) {
-    mailservice.sendEmail(user.email);
+    console.log('entered saved');
+    mailservice.sendEmail(req.body.email);
   }
+};
 
-  exports.updateUser = async function (req, res, query, updateQuery) {
-    try {
-      mongooseWrap.update(model.User, query, updateQuery);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+exports.updateUser = async function (req, res, query, updateQuery) {
+  try {
+    mongooseWrap.update(model.User, query, updateQuery);
+  } catch (error) {
+    console.log(error);
+  }
 };
