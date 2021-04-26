@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    form(action="", method="post")
+        input(id="yaddaText" type="text", name="text")
+        input(type="file" name="img")
+        select(name="tags")
+            each tag in tags
+                option(value=tag.name) #{tag.name}
+        input(type="submit", value="Yadda" class="classicButton")
