@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    div(class="largeLogo")
+    p(class="logoText") YaddaYaddaYadda
+
+    form(method="post" action="")
+        input(type="text", name="name" placeholder="Name")
+        input(type="email", name="email" placeholder="Email")
+        input(type="password", name="password")
+        input(type="password", name="passwordRepeat")
+        input(type="file", name="avatar")
+        input(type="file", name="handle")
+        input(type="submit", value="Create user" class="classicButton")
