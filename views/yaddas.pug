@@ -1,6 +1,8 @@
 extends layout
 
 block content
+    each avatar in avatars
+        img(src="data:image/png;base64," + avatar.img.data, alt="") 
     form(action="", method="post")
         input(id="yaddaText" type="text", name="text")
         input(type="file" name="img")

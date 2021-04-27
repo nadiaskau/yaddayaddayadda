@@ -1,16 +1,27 @@
 const model = require('./user');
 const bcrypt = require('bcrypt');
 const mongooseWrap = require('../../lib/mongooseWrap');
+const avatarModel = require('../avatar/avatar'); 
 
 const mailservice = require('../../lib/mailService');
 
 exports.createUser = async function (req, res) {
   let hash = await bcrypt.hash(req.body.password, 10);
 
+  let avatar = new avatarModel.Avatar({
+    img: {
+      data: req.body.avatar,
+      contentType: 'image/png'
+  }
+  }); 
+  let savedAvatar = await mongooseWrap.save(avatar); 
+
+  console.log("save" + savedAvatar);
+
   let user = new model.User({
     name: req.body.name,
     email: req.body.email,
-    password: hash,
+    password: hash
   });
 
   let saved = await mongooseWrap.save(user);
