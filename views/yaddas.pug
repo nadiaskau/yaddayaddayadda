@@ -5,8 +5,11 @@ block content
         img(src="data:image/png;base64," + avatar.img.data, alt="") 
     form(action="", method="post")
         input(id="yaddaText" type="text", name="text")
-        input(type="file" name="img")
+        input(type="file" name="img" accept=".png, .jpeg, .jpg")
         select(name="tags")
             each tag in tags
-                option(value=tag.name) #{tag.name}
+                option(value=tag.id) #{tag.name}
         input(type="submit", value="Yadda" class="classicButton")
+    each yadda in yaddas 
+        div(class="yadda") 
+            p #{yadda.text}

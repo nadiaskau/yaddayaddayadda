@@ -15,7 +15,6 @@ router.get('/pending', function (req, res, next) {
 });
 
 router.post('/createuser', async function (req, res) {
-  console.log(req.body);
   if (req.body.password == req.body.passwordRepeat) {
     await handler.createUser(req);
     res.redirect('/users/pending');

@@ -7,9 +7,15 @@ const handlerAvatar = require('../models/avatar/avatarHandler');
 router.get('/', async function(req, res, next) {
     let tags = await handlerTag.readTags(); 
     let avatars = await handlerAvatar.readAvatar();
-    let avatarsOLD = new Buffer(avatars[0].img.data).toString('base64');
+    let yaddas = await handler.readYaddas(); //read all posts 
+
+    //let avatarsOLD = new Buffer(avatars[0].img.data).toString('base64');
     
-    res.render('yaddas', {title:'YaddaYaddaYadda', tags: tags, avatars: avatars});
+    res.render('yaddas', {title:'YaddaYaddaYadda', tags: tags, avatars: avatars, yaddas: yaddas});
   });
+
+router.post('/', function(req, res, next){
+  handler.createYadda(req); 
+})
 
 module.exports = router;
