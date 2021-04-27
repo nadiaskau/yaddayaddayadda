@@ -17,7 +17,7 @@ block content
             p(class="yaddaText") #{yadda.text}
             each hashtag in yadda.tags
                 p(class="yaddaTag") #{hashtag}
-            form(action="reply/:" + yadda.id, method="post") 
+            form(action="/" + yadda.id, method="post") 
                 input(type="text", name="reply")
                 input(type="submit", value="Reply")
             

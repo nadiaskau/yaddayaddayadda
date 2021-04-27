@@ -3,6 +3,7 @@ var router = express.Router();
 const handler = require('../models/yadda/yaddaHandler');
 const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
+const handlerReply = require('../models/reply/replyHandler');
 
 router.get('/', async function(req, res, next) {
     let tags = await handlerTag.readTags(); 
@@ -16,10 +17,10 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', function(req, res, next){
   handler.createYadda(req); 
-})
+});
 
-router.post('reply/:yadda', async function(req, res, next){
-  
-})
+router.post('/:yadda', async function(req, res, next){
+  handlerReply.createReply(req, res);
+});
 
 module.exports = router;
