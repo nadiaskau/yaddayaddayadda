@@ -17,10 +17,12 @@ router.get('/', async function(req, res, next) {
 
 router.post('/', function(req, res, next){
   handler.createYadda(req); 
+  res.redirect('/');
 });
 
 router.post('/:yadda', async function(req, res, next){
   handlerReply.createReply(req, res);
+  res.redirect('/');
 });
 
 module.exports = router;
