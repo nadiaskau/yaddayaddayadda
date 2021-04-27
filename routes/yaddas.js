@@ -18,4 +18,8 @@ router.post('/', function(req, res, next){
   handler.createYadda(req); 
 })
 
+router.post('reply/:yadda', async function(req, res, next){
+  
+})
+
 module.exports = router;

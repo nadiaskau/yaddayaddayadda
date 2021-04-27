@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const yaddaSchema = mongoose.Schema({
     createdBy: mongoose.Schema.Types.ObjectId, 
+    createdByName: {type: String, default: null},
     timestamp: {type: Date, default: Date.now()},
     text: String, 
     //img: { data: Buffer, contentType: String },

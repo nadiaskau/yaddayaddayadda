@@ -11,7 +11,13 @@ block content
                 option(value=tag.id) #{tag.name}
         input(type="submit", value="Yadda" class="classicButton")
     each yadda in yaddas 
-        div(class="yadda") 
-            p #{yadda.text}
+        div(class="yadda" id=yadda.id) 
+            p(class="yaddaName") #{yadda.createdByName}
+            p(class="yaddaTime") #{yadda.timestamp}
+            p(class="yaddaText") #{yadda.text}
             each hashtag in yadda.tags
-                p #{hashtag}
+                p(class="yaddaTag") #{hashtag}
+            form(action="reply/:" + yadda.id, method="post") 
+                input(type="text", name="reply")
+                input(type="submit", value="Reply")
+            
