@@ -9,4 +9,4 @@ exports.readTags = async function(req, res, query){
     } catch (error) {
         console.log(error);
     }
-  }
+  };

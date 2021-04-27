@@ -1,5 +1,9 @@
 const mongooseWrap = require('../../lib/mongooseWrap');
 const model = require('./yadda');
+const handlerTag = require('../tag/tagHandler');
+const modelTag = require('../tag/tag');
+var ObjectId = require('mongoose').Types.ObjectId; 
+
 
 exports.createYadda = async function (req, res) {
     let yadda = new model.Yadda({
@@ -15,7 +19,12 @@ exports.createYadda = async function (req, res) {
 exports.readYaddas = async function(req, res, query){
     try {
     let yaddas = await mongooseWrap.retrieve(model.Yadda, query);
-    
+    for (let i = 0; i < yaddas.length; i++) {
+        
+        let tagText = await mongooseWrap.retrieveWithId(modelTag.Tag, yaddas[i].tags[0]); 
+        yaddas[i].tags[0] = tagText.name; 
+        
+    }
     return yaddas;
 
     } catch (error) {
