@@ -5,12 +5,14 @@ const model = require('./reply');
 
 
 exports.createReply = async function (req, res) {
+    //let yadda = await mongooseWrap.retrieveWithId(modelYadda, req.params.yadda); 
+
     let reply = new model.Reply({
         yaddaId : req.params.yadda, 
       createdBy: "6087ae1503767f74dccd8159", //CHANGE THIS ONE
       content: req.body.reply,
     });
-  
-    await mongooseWrap.save(reply);
+    let savedReply = await mongooseWrap.saveAndReturn(reply);
+    
     
   };

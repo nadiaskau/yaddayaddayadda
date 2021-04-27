@@ -8,15 +8,13 @@ const mailservice = require('../../lib/mailService');
 exports.createUser = async function (req, res) {
   let hash = await bcrypt.hash(req.body.password, 10);
 
-  let avatar = new avatarModel.Avatar({
+  let avatar = new avatarModel.Avatar({ 
     img: {
       data: req.body.avatar,
       contentType: 'image/png'
   }
   }); 
   let savedAvatar = await mongooseWrap.save(avatar); 
-
-  console.log("save" + savedAvatar);
 
   let user = new model.User({
     name: req.body.name,
@@ -26,7 +24,6 @@ exports.createUser = async function (req, res) {
 
   let saved = await mongooseWrap.save(user);
   if (saved) {
-    console.log('entered saved');
     mailservice.sendEmail(req.body.email);
   }
 };
