@@ -5,6 +5,7 @@ const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
 
+
 router.get('/', async function(req, res, next) {
     let tags = await handlerTag.readTags(); 
     let avatars = await handlerAvatar.readAvatar();
@@ -21,8 +22,14 @@ router.post('/', function(req, res, next){
 });
 
 router.post('/:yadda', async function(req, res, next){
-  handlerReply.createReply(req, res);
+  let savedReply = await handlerReply.createReply(req, res); 
+  let updateQuery = {$push: {replies: savedReply.id}}; 
+    let yadda = await handler.updateYadda(req.params.yadda, updateQuery); //change to update
+    console.log(savedReply);
+    console.log(yadda);
+  
   res.redirect('/');
 });
+
 
 module.exports = router;

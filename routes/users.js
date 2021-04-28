@@ -26,9 +26,8 @@ router.post('/createuser', async function (req, res) {
 });
 
 router.get('/confirmation/:token', (req, res) => {
-  const EMAIL_SECRET = 'asdf1093KMnzxcvnkljvasdu09123nlasdasdf';
   try {
-    const verifiedEmail = jwt.verify(req.params.token, EMAIL_SECRET);
+    const verifiedEmail = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
     handler.updateUser(
       req,
       res,

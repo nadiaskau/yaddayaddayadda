@@ -31,4 +31,13 @@ exports.readYaddas = async function(req, res, query){
     } catch (error) {
     console.log(error);
     }
+};
+
+exports.updateYadda = async function(id, updatequery){
+  try {
+      await mongooseWrap.updateWithID(model.Yadda, id, updatequery);
+      
+  } catch (error) {
+      console.log(error);
+  }
 }

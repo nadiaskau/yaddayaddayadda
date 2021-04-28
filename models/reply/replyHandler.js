@@ -10,10 +10,9 @@ exports.createReply = async function (req, res) {
       createdBy: "6087ae1503767f74dccd8159", //CHANGE THIS ONE
       content: req.body.reply,
     });
-    await mongooseWrap.saveAndReturn(reply).then(async function(savedReply){
-        let yadda = await mongooseWrap.retrieveWithId(modelYadda.Yadda, req.params.yadda);
-        console.log(savedReply);
-    });
+    
+    let savedReply = await mongooseWrap.saveAndReturn(reply); 
+    return savedReply; 
     
     
   };
