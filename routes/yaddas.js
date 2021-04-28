@@ -6,28 +6,35 @@ const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
 
 
-router.get('/', async function(req, res, next) {
-    let tags = await handlerTag.readTags(); 
-    let avatars = await handlerAvatar.readAvatar();
-    let yaddas = await handler.readYaddas(); //read all posts 
+router.get('/', async function (req, res, next) {
+  let tags = await handlerTag.readTags();
+  let avatars = await handlerAvatar.readAvatar();
+  let yaddas = await handler.readYaddas(); //read all posts 
 
-    //let avatarsOLD = new Buffer(avatars[0].img.data).toString('base64');
-    
-    res.render('yaddas', {title:'YaddaYaddaYadda', tags: tags, avatars: avatars, yaddas: yaddas});
+  //let avatarsOLD = new Buffer(avatars[0].img.data).toString('base64');
+
+  res.render('yaddas', {
+    title: 'YaddaYaddaYadda',
+    tags: tags,
+    avatars: avatars,
+    yaddas: yaddas
   });
+});
 
-router.post('/', function(req, res, next){
-  handler.createYadda(req); 
+router.post('/', function (req, res, next) {
+  handler.createYadda(req);
   res.redirect('/');
 });
 
-router.post('/:yadda', async function(req, res, next){
-  let savedReply = await handlerReply.createReply(req, res); 
-  let updateQuery = {$push: {replies: savedReply.id}}; 
-    let yadda = await handler.updateYadda(req.params.yadda, updateQuery); //change to update
-    console.log(savedReply);
-    console.log(yadda);
-  
+router.post('/:yadda', async function (req, res, next) {
+  let savedReply = await handlerReply.createReply(req, res);
+  let updateQuery = {
+    $push: {
+      replies: savedReply.id
+    }
+  };
+  await handler.updateYadda(req.params.yadda, updateQuery); //updating yadda with replies
+
   res.redirect('/');
 });
 
