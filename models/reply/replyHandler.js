@@ -13,6 +13,11 @@ exports.createReply = async function (req, res) {
     
     let savedReply = await mongooseWrap.saveAndReturn(reply); 
     return savedReply; 
-    
-    
   };
+
+  exports.readRepliesByIds = async function(array){
+    let query = {_id: {$in: array}}; 
+    let replies = await mongooseWrap.retrieve(model.Reply, query); 
+    console.log(replies);
+    return replies; 
+};

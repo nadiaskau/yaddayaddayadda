@@ -16,7 +16,7 @@ block content
             p(class="yaddaTime") #{yadda.timestamp}
             p(class="yaddaText") #{yadda.text}
             if(yadda.replies.length > 0)
-                a(href="/" class="yaddaReplies") Replies: #{yadda.replies.length}
+                a(href="/" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
             each hashtag in yadda.tags
                 p(class="yaddaTag") #{hashtag}
             form(action="/" + yadda.id, method="post") 

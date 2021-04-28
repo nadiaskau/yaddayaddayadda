@@ -26,6 +26,13 @@ router.post('/', function (req, res, next) {
   res.redirect('/');
 });
 
+router.get('/:yadda', async function(req, res, next){
+  let yadda = await handler.readYaddaWithId(req.params.yadda); 
+  
+  await handlerReply.readRepliesByIds(yadda.replies);
+  res.render('yaddas'); 
+})
+
 router.post('/:yadda', async function (req, res, next) {
   let savedReply = await handlerReply.createReply(req, res);
   let updateQuery = {
