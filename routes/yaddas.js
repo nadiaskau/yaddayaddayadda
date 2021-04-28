@@ -11,13 +11,12 @@ router.get('/', async function (req, res, next) {
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
 
-  //let avatarsOLD = new Buffer(avatars[0].img.data).toString('base64');
-
   res.render('yaddas', {
     title: 'YaddaYaddaYadda',
     tags: tags,
     avatars: avatars,
-    yaddas: yaddas
+    yaddas: yaddas,
+    replies: ""
   });
 });
 
@@ -28,9 +27,19 @@ router.post('/', function (req, res, next) {
 
 router.get('/:yadda', async function(req, res, next){
   let yadda = await handler.readYaddaWithId(req.params.yadda); 
+  let replies = await handlerReply.readRepliesByIds(yadda.replies);
+  let tags = await handlerTag.readTags();
+  let avatars = await handlerAvatar.readAvatar();
+  let yaddas = await handler.readYaddas(); //read all posts 
+
+  res.render('yaddas', {
+    title: 'YaddaYaddaYadda',
+    tags: tags,
+    avatars: avatars,
+    yaddas: yaddas, 
+    replies: replies
+  });
   
-  await handlerReply.readRepliesByIds(yadda.replies);
-  res.render('yaddas'); 
 })
 
 router.post('/:yadda', async function (req, res, next) {

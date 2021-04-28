@@ -17,6 +17,10 @@ block content
             p(class="yaddaText") #{yadda.text}
             if(yadda.replies.length > 0)
                 a(href="/" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
+            if(replies.length > 0)
+                each reply in replies
+                    if(reply.yaddaId == yadda.id)
+                        p #{reply.content}
             each hashtag in yadda.tags
                 p(class="yaddaTag") #{hashtag}
             form(action="/" + yadda.id, method="post") 
