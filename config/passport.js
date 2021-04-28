@@ -3,29 +3,26 @@ const bcrypt = require('bcrypt');
 
 // Load User model
 const User = require('../models/user/user');
-const handler = require('../models/user/userHandler'); 
 
 module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
-      handler.findUser({
+      User.findOne({
         email: email
       }).then(user => {
         console.log(user);
         if (!user) {
-          return done(null, false);
+          return done(null, false, { message: 'That email is not registered' });
         }
 
         // Match password
         bcrypt.compare(password, user.password, (err, isMatch) => {
-          if (err) {
-            throw err;
-          }
+          if (err) throw err;
           if (isMatch) {
             return done(null, user);
           } else {
-            return done(null, false);
+            return done(null, false, { message: 'Password incorrect' });
           }
         });
       });
@@ -34,11 +31,10 @@ module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
     done(null, user.id);
-    
   });
 
   passport.deserializeUser(function(id, done) {
-    handler.findUserwithId(id, function(err, user) {
+    User.findById(id, function(err, user) {
       done(err, user);
     });
   });
