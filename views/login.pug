@@ -1,0 +1,13 @@
+extends layout 
+
+block content
+    
+    div(id="loginContainer" )
+        
+        form(method="post" id="loginForm" action="")
+            input(type="email" name="email" placeholder="Enter e-mail")
+            input(type="password" name="password" placeholder="Enter password")
+            input(type="submit" id="loginButton" value="Login" class="button")
+    
+        p Don't have a user? 
+        a(href="./createuser") Create one here

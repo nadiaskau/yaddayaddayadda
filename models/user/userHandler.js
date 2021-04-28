@@ -35,3 +35,13 @@ exports.updateUser = async function (req, res, query, updateQuery) {
     console.log(error);
   }
 };
+
+exports.findUser = function(query){
+  console.log(query);
+  try {
+    let user = mongooseWrap.retrieve(model.User, query);
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};

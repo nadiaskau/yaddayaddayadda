@@ -4,10 +4,26 @@ require('dotenv').config();
 var router = express.Router();
 const handler = require('../models/user/userHandler');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 /* GET users listing. */
 router.get('/createuser', function (req, res, next) {
   res.render('createuser', { title: 'Create user' });
+});
+
+router.get('/login', function (req, res, next) {
+  res.render('login', { title: 'Your credentials' });
+});
+
+router.post('/login', function (req, res, next) {
+  passport.authenticate('local', {
+    successRedirect: '../',
+    failureRedirect: '/users/login',
+    failureFlash: true
+  })
+
+  (req, res, next);
+  
 });
 
 router.get('/pending', function (req, res, next) {

@@ -10,6 +10,7 @@ router.get('/', async function (req, res, next) {
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
+  console.log(req.session);
 
   res.render('yaddas', {
     title: 'YaddaYaddaYadda',
