@@ -38,9 +38,19 @@ exports.updateUser = async function (req, res, query, updateQuery) {
 
 exports.findUser = function(query){
   try {
-    let user = mongooseWrap.retrieve(model.User, query);
+    let user = mongooseWrap.retrieveOne(model.User, query);
     return user;
   } catch (error) {
     console.log(error);
+  }
+};
+
+exports.findUserwithId = async function(id){
+  try {
+  let user = await mongooseWrap.retrieveWithId(model.User, id);
+  return user;
+
+  } catch (error) {
+  console.log(error);
   }
 };

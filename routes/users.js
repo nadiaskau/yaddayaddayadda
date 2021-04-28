@@ -22,9 +22,7 @@ router.post('/login', function (req, res, next) {
     failureRedirect: '/users/login',
     failureFlash: true
   })
-
   (req, res, next);
-  
 });
 
 router.get('/pending', forwardAuthenticated, function (req, res, next) {
@@ -57,5 +55,13 @@ router.get('/confirmation/:token', (req, res) => {
 
   return res.redirect('http://localhost:3000/');
 });
+
+// Logout
+router.get('/logout', (req, res) => {
+  req.logout();
+  //req.flash('success_msg', 'You are logged out');
+  res.redirect('/users/login');
+});
+
 
 module.exports = router;

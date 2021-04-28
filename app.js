@@ -12,12 +12,14 @@ var usersRouter = require('./routes/users');
 var yaddasRouter = require('./routes/yaddas');
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const cors = require('cors');
+//const cors = require('cors');
 
 var app = express();
 
 // Passport Config
 require('./lib/passport')(passport);
+
+
 
 // Passport middleware
 app.use(passport.initialize());
@@ -37,7 +39,7 @@ app.use(
   session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 
@@ -73,7 +75,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.use(cors('*'));
+//app.use(cors('*'));
 //app.use(transporter);
 
 

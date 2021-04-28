@@ -4,21 +4,24 @@ const handler = require('../models/yadda/yaddaHandler');
 const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
-const { ensureAuthenticated } = require('../lib/auth');
+const auth = require('../lib/auth');
 
 
-router.get('/', ensureAuthenticated, async function (req, res) {
+
+
+router.get('/',  auth.ensureAuthenticated, async function (req, res) {
+  
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
 
-  res.render('yaddas', {
-    title: 'YaddaYaddaYadda',
-    tags: tags,
-    avatars: avatars,
-    yaddas: yaddas,
-    replies: ""
-  });
+    res.render('yaddas', {
+      title: 'YaddaYaddaYadda',
+      tags: tags,
+      avatars: avatars,
+      yaddas: yaddas,
+      replies: ""
+    });
 });
 
 router.post('/', function (req, res, next) {
@@ -26,7 +29,7 @@ router.post('/', function (req, res, next) {
   res.redirect('/');
 });
 
-router.get('/:yadda', ensureAuthenticated, async function(req, res, next){
+router.get('/:yadda', async function(req, res, next){
   let yadda = await handler.readYaddaWithId(req.params.yadda); 
   let replies = await handlerReply.readRepliesByIds(yadda.replies);
   let tags = await handlerTag.readTags();
