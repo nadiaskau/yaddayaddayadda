@@ -30,12 +30,11 @@ router.post('/', function (req, res, next) {
   res.redirect('/');
 });
 
-router.get('/:yadda', auth.ensureAuthenticated, async function(req, res, next){
-  let yadda = await handler.readYaddaWithId(req.params.yadda); 
-  if(yadda.replies != null){
-    var replies = await handlerReply.readRepliesByIds(yadda.replies);
-  }
-  
+router.get('/yadda', auth.ensureAuthenticated, async function(req, res, next){
+  console.log(req.query);
+  let yadda = await handler.readYaddaWithId(req.query.id); 
+  var replies = await handlerReply.readRepliesByIds(yadda.replies);
+
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
@@ -49,7 +48,7 @@ router.get('/:yadda', auth.ensureAuthenticated, async function(req, res, next){
     loggedin: true
   });
   
-})
+}) 
 
 router.post('/:yadda', async function (req, res, next) {
   let savedReply = await handlerReply.createReply(req, res);
