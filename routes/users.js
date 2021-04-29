@@ -9,11 +9,11 @@ const { forwardAuthenticated } = require('../lib/auth');
 
 /* GET users listing. */
 router.get('/createuser', forwardAuthenticated, function (req, res, next) {
-  res.render('createuser', { title: 'Create user' });
+  res.render('createuser', { title: 'Create user', loggedin: false });
 });
 
 router.get('/login', forwardAuthenticated, function (req, res, next) {
-  res.render('login', { title: 'Your credentials' });
+  res.render('login', { title: 'Your credentials', loggedin: false });
 });
 
 router.post('/login', function (req, res, next) {
@@ -26,7 +26,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/pending', forwardAuthenticated, function (req, res, next) {
-  res.render('pending', { title: 'Pending' });
+  res.render('pending', { title: 'Pending', loggedin: false});
 });
 
 router.post('/createuser', async function (req, res) {

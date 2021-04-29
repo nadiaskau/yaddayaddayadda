@@ -20,7 +20,8 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
       tags: tags,
       avatars: avatars,
       yaddas: yaddas,
-      replies: ""
+      replies: "",
+      loggedin: true
     });
 });
 
@@ -41,7 +42,8 @@ router.get('/:yadda', async function(req, res, next){
     tags: tags,
     avatars: avatars,
     yaddas: yaddas, 
-    replies: replies
+    replies: replies,
+    loggedin: true
   });
   
 })

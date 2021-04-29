@@ -4,4 +4,17 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      nav
+        ul
+          li
+            a(href="/") Home
+          li
+            if loggedin 
+              a(href="/users/logout") Log out
+            else
+              a(href="/users/login") Login
+            
+
+    main
+      block content
