@@ -20,6 +20,7 @@ exports.readYaddas = async function(req, res, query){
     try {
     let yaddas = await mongooseWrap.retrieve(model.Yadda, query);
     for (let i = 0; i < yaddas.length; i++) {
+        console.log("model user: " + modelUser.User);
         let user = await mongooseWrap.retrieveWithId(modelUser.User, yaddas[i].createdBy);
         yaddas[i].createdByName = user.name;
         let tagText = await mongooseWrap.retrieveWithId(modelTag.Tag, yaddas[i].tags[0]); 
