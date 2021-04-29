@@ -2,7 +2,7 @@ extends layout
 
 block content
     each avatar in avatars
-        img(src="data:image/png;base64," + avatar.img.data, alt="") 
+        img(src="data:image/" + avatar.img.contentType + ";base64," + avatar.img.data.toString('base64'), alt="") 
     form(action="", method="post")
         input(id="yaddaText" type="text", name="text")
         input(type="file" name="img" accept=".png, .jpeg, .jpg")

@@ -6,9 +6,6 @@ const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
 const auth = require('../lib/auth');
 
-
-
-
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   console.log(req.session.passport);
   let tags = await handlerTag.readTags();
