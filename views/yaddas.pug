@@ -15,14 +15,16 @@ block content
             p(class="yaddaName") #{yadda.createdByName}
             p(class="yaddaTime") #{yadda.timestamp}
             p(class="yaddaText") #{yadda.text}
+            each hashtag in yadda.tags
+                p(class="yaddaTag") #{hashtag}
             if(yadda.replies.length > 0)
                 a(href="/" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
             if(replies.length > 0)
                 each reply in replies
                     if(reply.yaddaId == yadda.id)
+                        p #{reply.createdByName}
                         p #{reply.content}
-            each hashtag in yadda.tags
-                p(class="yaddaTag") #{hashtag}
+
             form(action="/" + yadda.id, method="post") 
                 input(type="text", name="reply")
                 input(type="submit", value="Reply")
