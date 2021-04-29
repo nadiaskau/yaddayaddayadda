@@ -10,15 +10,13 @@ const mailservice = require('../../lib/mailService');
 
 exports.createUser = async function (req, res) {
   let hash = await bcrypt.hash(req.body.password, 10);
-  //console.log(req);
-  //imageService.upload.single('avatar');
-  /* let avatar = new avatarModel.Avatar({ 
+  let avatar = new avatarModel.Avatar({ 
     img: {
-      data: fs.readFileSync(path.join('../../uploads/' + req.body.avatar)),
+      data: fs.readFileSync(path.join('./uploads/' + req.file.filename)),
       contentType: 'image/png'
   }
-  });  */
-  //let savedAvatar = await mongooseWrap.save(avatar); 
+  }); 
+  let savedAvatar = await mongooseWrap.save(avatar); 
 
   let user = new model.User({
     name: req.body.name,
