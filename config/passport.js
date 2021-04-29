@@ -11,9 +11,11 @@ module.exports = function(passport) {
       model.User.findOne({
         email: email
       }).then(user => {
-        console.log(user);
-        if (!user) {
+        if (!user) { //if the user does not exist 
           return done(null, false, { message: 'That email is not registered' });
+        }
+        if(user.activated == false) { //if the user is not activated
+          return done(null, false, { message: 'Check your email for verification link' });
         }
 
         // Match password
@@ -22,7 +24,7 @@ module.exports = function(passport) {
           if (isMatch) {
             return done(null, user);
           } else {
-            return done(null, false, { message: 'Password incorrect' });
+            return done(null, false, { message: 'Username or password incorrect' }); //passwords is incorrect, but we don't want to say that out loud
           }
         });
       });
