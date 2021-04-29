@@ -16,9 +16,12 @@ exports.createYadda = async function (req, res) {
     
   };
 
-exports.readYaddas = async function(req, res, query){
+  //Read all our yaddas
+exports.readYaddas = async function(req, res){
     try {
-    let yaddas = await mongooseWrap.retrieve(model.Yadda, query);
+    let query = {};
+    let sortQuery = {timestamp: -1};
+    let yaddas = await mongooseWrap.retrieveSorted(model.Yadda, query, sortQuery);
     for (let i = 0; i < yaddas.length; i++) {
         let user = await mongooseWrap.retrieveWithId(modelUser.User, yaddas[i].createdBy);
         yaddas[i].createdByName = user.name;
@@ -33,18 +36,10 @@ exports.readYaddas = async function(req, res, query){
     }
 };
 
-// Gets the id of yadda, 
+// Read Yadda with ID  
 exports.readYaddaWithId = async function(id){
   try {
   let yadda = await mongooseWrap.retrieveWithId(model.Yadda, id);
-
-/*   for (let i = 0; i < yaddas.length; i++) {
-      let user = await mongooseWrap.retrieveWithId(modelUser.User, yaddas[i].createdBy);
-      yaddas[i].createdByName = user.name;
-      let tagText = await mongooseWrap.retrieveWithId(modelTag.Tag, yaddas[i].tags[0]); 
-      yaddas[i].tags[0] = tagText.name; 
-      
-  } */
   return yadda;
 
   } catch (error) {
