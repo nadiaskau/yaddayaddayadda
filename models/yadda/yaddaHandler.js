@@ -7,7 +7,7 @@ const modelUser = require('../user/user');
 
 exports.createYadda = async function (req, res) {
     let yadda = new model.Yadda({
-      createdBy: "608681a3ed6e2447b024b0e3", //CHANGE THIS ONE
+      createdBy: req.session.passport.user, 
       text: req.body.text,
       tags: [req.body.tags], 
     });
@@ -33,12 +33,12 @@ exports.readYaddas = async function(req, res, query){
     }
 };
 
-
+// Gets the id of yadda, 
 exports.readYaddaWithId = async function(id){
   try {
   let yadda = await mongooseWrap.retrieveWithId(model.Yadda, id);
 
-  /* for (let i = 0; i < yaddas.length; i++) {
+/*   for (let i = 0; i < yaddas.length; i++) {
       let user = await mongooseWrap.retrieveWithId(modelUser.User, yaddas[i].createdBy);
       yaddas[i].createdByName = user.name;
       let tagText = await mongooseWrap.retrieveWithId(modelTag.Tag, yaddas[i].tags[0]); 

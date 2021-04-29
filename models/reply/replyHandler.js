@@ -7,7 +7,7 @@ const model = require('./reply');
 exports.createReply = async function (req, res) {
     let reply = new model.Reply({
         yaddaId : req.params.yadda, 
-      createdBy: "6087ae1503767f74dccd8159", //CHANGE THIS ONE
+      createdBy: req.session.passport.user,
       content: req.body.reply,
     });
     

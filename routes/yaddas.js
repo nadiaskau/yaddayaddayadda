@@ -10,7 +10,7 @@ const auth = require('../lib/auth');
 
 
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
-  
+  console.log(req.session.passport);
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
   res.redirect('/');
 });
 
-router.get('/:yadda', async function(req, res, next){
+router.get('/:yadda', auth.ensureAuthenticated, async function(req, res, next){
   let yadda = await handler.readYaddaWithId(req.params.yadda); 
   let replies = await handlerReply.readRepliesByIds(yadda.replies);
   let tags = await handlerTag.readTags();
