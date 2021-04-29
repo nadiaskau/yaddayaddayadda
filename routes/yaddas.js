@@ -32,7 +32,10 @@ router.post('/', function (req, res, next) {
 
 router.get('/:yadda', auth.ensureAuthenticated, async function(req, res, next){
   let yadda = await handler.readYaddaWithId(req.params.yadda); 
-  let replies = await handlerReply.readRepliesByIds(yadda.replies);
+  if(yadda.replies != null){
+    var replies = await handlerReply.readRepliesByIds(yadda.replies);
+  }
+  
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
