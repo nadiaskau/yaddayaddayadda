@@ -6,23 +6,7 @@ const handler = require('../models/user/userHandler');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../lib/auth');
-
-var multer = require('multer');
-var fs = require('fs');
-var path = require('path');
-
-
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-  }
-});
-
-var upload = multer({ storage: storage }).single('avatar');
-
+var image = require('../lib/image');
 
 /* GET users listing. */
 router.get('/createuser', forwardAuthenticated, function (req, res, next) {
@@ -46,19 +30,7 @@ router.get('/pending', forwardAuthenticated, function (req, res, next) {
   res.render('pending', { title: 'Pending', loggedin: false});
 });
 
-router.post('/createuser', async function (req, res) {
-  console.log(req);
-  upload(req, res, (err) => {
-    if(err){
-     console.log(err);
-    } else {
-      if(req.file == undefined){
-        console.log("no file");
-      } else {
-        console.log("super");
-      }
-    }
-  });
+router.post('/createuser', image.upload.single('avatar'), async function (req, res) {
 
   if (req.body.password == req.body.passwordRepeat) {
     await handler.createUser(req);
