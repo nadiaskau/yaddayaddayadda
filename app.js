@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const flash = require('connect-flash');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var yaddasRouter = require('./routes/yaddas');
@@ -14,7 +13,6 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yadda');
 var db = mongoose.connection;
-
 
 var app = express();
 
@@ -56,10 +54,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-  //routes
-  app.use('/', yaddasRouter);
-  app.use('/index', indexRouter);
-  app.use('/users', usersRouter);
+//routes
+app.use('/', yaddasRouter);
+app.use('/index', indexRouter);
+app.use('/users', usersRouter);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
