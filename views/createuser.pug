@@ -1,13 +1,18 @@
 extends layout
-
+block head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/login_createUser.css')
 block content
     div(class="largeLogo")
-    p(class="logoText") YaddaYaddaYadda
+        img(src="../images/logo.png")
+        p(class="largeLogoText") YaddaYaddaYadda
 
-    form(method="post" action="" enctype="multipart/form-data")
-        input(type="text", name="name" placeholder="Name")
-        input(type="email", name="email" placeholder="Email")
-        input(type="password", name="password")
-        input(type="password", name="passwordRepeat")
-        input(type="file", name="avatar")
-        input(type="submit", value="Create user" class="classicButton")
+    div(class="flexParent" id="createUserContainer")
+        form(method="post" action="" enctype="multipart/form-data" class="flexParent" id="createUserForm")
+            input(type="text", name="name" placeholder="Name" class="inputLarge")
+            input(type="email", name="email" placeholder="Email" class="inputLarge")
+            input(type="password", name="password" class="inputLarge" placeholder="Password")
+            input(type="password", name="passwordRepeat" placeholder="Repeat password" class="inputLarge")
+            input(type="file", name="avatar")
+            input(type="submit", value="Create user" class="button" id="createUserButton")

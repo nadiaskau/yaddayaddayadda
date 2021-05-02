@@ -14,7 +14,7 @@ router.get('/createuser', forwardAuthenticated, function (req, res, next) {
 });
 
 router.get('/login', forwardAuthenticated, function (req, res, next) {
-  res.render('login', { title: 'Your credentials', loggedin: false });
+  res.render('login', { title: 'Your credentials', loggedin: false, styleSpecific: "login" });
 });
 
 router.post('/login', function (req, res, next) {
