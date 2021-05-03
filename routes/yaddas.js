@@ -17,11 +17,9 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   let images = await handlerImage.readImages(); 
   let following = await handlerUser.findUserwithId(req.session.passport.user);
   following = following.following; 
-  
   let usersQuery = {$and: [{_id: { $ne: req.session.passport.user}}, {_id: {$nin: following}}]}; //find all users except the loggedin user
-
   let users = await handlerUser.findUsers(usersQuery); 
-  console.log(users);
+  
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
       tags: tags,
