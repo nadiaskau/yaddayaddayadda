@@ -58,5 +58,9 @@ block content
                 else
                     a(href="/users/login") Login
         div(id="trendsAndProfiles")
+            h3 Follow
+            each user in users
+                p(class="users") #{user.name}
+                button(class="button" id=user.id value=user.id) Follow
             h3 Trends
             

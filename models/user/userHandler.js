@@ -48,6 +48,15 @@ exports.findUser = function(query){
   }
 };
 
+exports.findUsers = function(query){
+  try {
+    let users = mongooseWrap.retrieve(model.User, query);
+    return users;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 exports.findUserwithId = async function(id){
   try {
   let user = await mongooseWrap.retrieveWithId(model.User, id);

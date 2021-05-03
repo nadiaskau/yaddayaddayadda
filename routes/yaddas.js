@@ -5,15 +5,19 @@ const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
 const handlerImage = require('../models/image/imageHandler');
+const handlerUser = require('../models/user/userHandler');
 const auth = require('../lib/auth');
 var image = require('../lib/image');
 
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
-  console.log(req.session.passport);
+  //console.log(req.session.passport);
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
   let images = await handlerImage.readImages(); 
+  let usersQuery = { _id: { $ne: req.session.passport.user } }; //find all users except the loggedin user
+  let users = await handlerUser.findUsers(usersQuery); 
+  console.log(users);
 
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
@@ -22,6 +26,7 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
       yaddas: yaddas,
       images: images,
       replies: "",
+      users: users,
       loggedin: true
     });
 });
