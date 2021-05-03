@@ -16,12 +16,13 @@ exports.createUser = async function (req, res) {
       contentType: 'image/png'
   }
   }); 
-  let savedAvatar = await mongooseWrap.save(avatar); 
+  let savedAvatar = await mongooseWrap.saveAndReturn(avatar); 
 
   let user = new model.User({
     name: req.body.name,
     email: req.body.email,
-    password: hash
+    password: hash,
+    avatarId: savedAvatar.id
   });
 
   let saved = await mongooseWrap.save(user);
