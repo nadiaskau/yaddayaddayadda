@@ -5,6 +5,7 @@ const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
 const auth = require('../lib/auth');
+var image = require('../lib/image');
 
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   console.log(req.session.passport);
@@ -23,7 +24,8 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
     });
 });
 
-router.post('/', function (req, res, next) {
+router.post('/', image.upload.single('img'), function (req, res, next) {
+  console.log(req.file);
   handler.createYadda(req);
   res.redirect('/');
 });

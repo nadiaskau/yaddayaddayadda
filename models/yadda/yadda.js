@@ -6,7 +6,7 @@ const yaddaSchema = mongoose.Schema({
     avatarId: {type: mongoose.Schema.Types.ObjectId, default: null},
     timestamp: {type: Date, default: Date.now()},
     text: String, 
-    //img: { data: Buffer, contentType: String },
+    imgId: mongoose.Schema.Types.ObjectId, 
     tags: [mongoose.Schema.Types.ObjectId], 
     replies: [mongoose.Schema.Types.ObjectId]
 });
