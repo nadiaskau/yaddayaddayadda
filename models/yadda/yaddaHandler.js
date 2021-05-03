@@ -2,6 +2,7 @@ const mongooseWrap = require('../../lib/mongooseWrap');
 const model = require('./yadda');
 const modelTag = require('../tag/tag');
 const modelUser = require('../user/user');
+const modelAvatar = require('../avatar/avatar');
 
 
 
@@ -27,7 +28,7 @@ exports.readYaddas = async function(req, res){
         yaddas[i].createdByName = user.name;
         let tagText = await mongooseWrap.retrieveWithId(modelTag.Tag, yaddas[i].tags[0]); 
         yaddas[i].tags[0] = tagText.name; 
-        
+        yaddas[i].avatarId = user.avatarId; 
     }
     return yaddas;
 

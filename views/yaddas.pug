@@ -1,8 +1,6 @@
 extends layout
 
 block content
-    each avatar in avatars
-        img(src="data:image/" + avatar.img.contentType + ";base64," + avatar.img.data.toString('base64'), alt="") 
     form(action="", method="post")
         input(id="yaddaText" type="text", name="text")
         input(type="file" name="img" accept=".png, .jpeg, .jpg")
@@ -11,7 +9,10 @@ block content
                 option(value=tag.id) #{tag.name}
         input(type="submit", value="Yadda" class="classicButton")
     each yadda in yaddas 
-        div(class="yadda" id=yadda.id) 
+        div(class="yadda" id=yadda.id)
+            each avatar in avatars
+                if(yadda.avatarId == avatar.id)
+                    img(class="avatarYadda" src="data:image/" + avatar.img.contentType + ";base64," + avatar.img.data.toString('base64'), alt="")
             p(class="yaddaName") #{yadda.createdByName}
             p(class="yaddaTime") #{yadda.timestamp}
             p(class="yaddaText") #{yadda.text}

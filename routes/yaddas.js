@@ -12,6 +12,7 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
 
+
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
       tags: tags,
