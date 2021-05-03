@@ -8,15 +8,20 @@ const handlerImage = require('../models/image/imageHandler');
 const handlerUser = require('../models/user/userHandler');
 const auth = require('../lib/auth');
 var image = require('../lib/image');
+const mongoose = require('mongoose');
 
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
   let images = await handlerImage.readImages(); 
-  let usersQuery = { _id: { $ne: req.session.passport.user } }; //find all users except the loggedin user
-  let users = await handlerUser.findUsers(usersQuery); 
+  let following = await handlerUser.findUserwithId(req.session.passport.user);
+  following = following.following; 
+  
+  let usersQuery = {$and: [{_id: { $ne: req.session.passport.user}}, {_id: {$nin: following}}]}; //find all users except the loggedin user
 
+  let users = await handlerUser.findUsers(usersQuery); 
+  console.log(users);
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
       tags: tags,
