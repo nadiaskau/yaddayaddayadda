@@ -61,6 +61,7 @@ block content
             h3 Follow
             each user in users
                 p(class="users") #{user.name}
-                button(class="button" id=user.id value=user.id) Follow
+                a(href="/users/follow?id=" + user.id)
+                    button(class="button") Follow
             h3 Trends
             

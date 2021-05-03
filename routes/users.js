@@ -58,6 +58,17 @@ router.get('/confirmation/:token', (req, res) => {
   return res.redirect('http://localhost:3000/');
 });
 
+router.get('/follow', async function(req, res){
+  console.log(req.query);
+  await handler.updateUser(req, res, 
+    {_id: req.session.passport.user}, 
+    {$push: {following: req.query.id}});
+  await handler.updateUser(req, res, 
+    {_id: req.query.id}, 
+    {$push: {followers: req.session.passport.user}})
+  res.redirect('../../')
+})
+
 // Logout
 router.get('/logout', (req, res) => {
   req.logout();

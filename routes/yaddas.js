@@ -10,14 +10,12 @@ const auth = require('../lib/auth');
 var image = require('../lib/image');
 
 router.get('/',  auth.ensureAuthenticated, async function (req, res) {
-  //console.log(req.session.passport);
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
   let images = await handlerImage.readImages(); 
   let usersQuery = { _id: { $ne: req.session.passport.user } }; //find all users except the loggedin user
   let users = await handlerUser.findUsers(usersQuery); 
-  console.log(users);
 
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
@@ -38,7 +36,6 @@ router.post('/', image.upload.single('img'), function (req, res, next) {
 });
 
 router.get('/yadda', auth.ensureAuthenticated, async function(req, res, next){
-  console.log(req.query);
   let yadda = await handler.readYaddaWithId(req.query.id); 
   var replies = await handlerReply.readRepliesByIds(yadda.replies);
 
