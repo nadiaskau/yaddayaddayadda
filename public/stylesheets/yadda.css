@@ -1,0 +1,66 @@
+#yaddaContainer{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1.5;
+}
+
+.column{
+    flex-grow: 1;
+    
+}
+
+main{
+    display: flex;
+    background-color: #E3E3E3;
+}
+
+.avatarYadda{
+    width: 90px; 
+    height: 90px; 
+    object-fit: cover;
+    border-radius: 45px;
+}
+
+.imageYadda{
+    max-width: 840px;
+    object-fit: cover;
+}
+
+.yadda{
+    background-color: white;
+    margin-bottom: 2px;
+    padding: 2%;
+    display: flex;
+}
+
+.avatar{
+    flex-grow: 0;
+    margin-right: 2%;
+}
+
+.yaddaPost{
+    flex-grow: 1;
+}
+
+.yaddaName{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.yaddaTag{
+    color: #2d6ab9;
+    
+}
+
+.navigation{
+    display: none;
+}
+
+.navigationYadda, .logo, #yaddaForm{
+    height: 150px;
+    background-color: white;
+}
+
+.navigationYadda ul{
+    margin: 0
+}

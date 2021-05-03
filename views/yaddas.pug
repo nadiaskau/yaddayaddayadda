@@ -1,37 +1,62 @@
 extends layout
 
-block content
-    form(action="", method="post" enctype="multipart/form-data")
-        input(id="yaddaText" type="text", name="text")
-        input(type="file" name="img" accept=".png, .jpeg, .jpg")
-        select(name="tags")
-            each tag in tags
-                option(value=tag.id) #{tag.name}
-        input(type="submit", value="Yadda" class="classicButton")
-    each yadda in yaddas 
-        div(class="yadda" id=yadda.id)
-            each avatar in avatars
-                if(yadda.avatarId == avatar.id)
-                    img(class="avatarYadda" src="data:image/" + avatar.img.contentType + 
-                    ";base64," + avatar.img.data.toString('base64'), alt="")
-            p(class="yaddaName") #{yadda.createdByName}
-            p(class="yaddaTime") #{yadda.timestamp}
-            p(class="yaddaText") #{yadda.text}
-            each image in images
-                if(yadda.imgId == image.id)
-                    img(class="imageYadda" src="data:image/" + image.img.contentType + 
-                    ";base64," + image.img.data.toString('base64'), alt="")
-            each hashtag in yadda.tags
-                p(class="yaddaTag") #{hashtag}
-            if(yadda.replies.length > 0)
-                a(href="/yadda?id=" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
-            if(replies.length > 0)
-                each reply in replies
-                    if(reply.yaddaId == yadda.id)
-                        p #{reply.createdByName}
-                        p #{reply.content}
+block head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/yadda.css')
 
-            form(action="/" + yadda.id, method="post") 
-                input(type="text", name="reply")
-                input(type="submit", value="Reply")
+block content
+    
+    div(class="column")
+        div(class="logo") Logo
+        div(id="adds")
+            h3 Adds
+    div(id="yaddaContainer")
+        form(action="", method="post" enctype="multipart/form-data" id="yaddaForm")
+            input(id="yaddaText" type="text", name="text")
+            input(type="file" name="img" accept=".png, .jpeg, .jpg")
+            select(name="tags")
+                each tag in tags
+                    option(value=tag.id) #{tag.name}
+            input(type="submit", value="Yadda" class="classicButton")
+        each yadda in yaddas 
+            div(class="yadda" id=yadda.id)
+                div(class="avatar")
+                    each avatar in avatars
+                        if(yadda.avatarId == avatar.id)
+                            img(class="avatarYadda" src="data:image/" + avatar.img.contentType + 
+                            ";base64," + avatar.img.data.toString('base64'), alt="")
+                div(class="yaddaPost")
+                    p(class="yaddaName") #{yadda.createdByName}
+                    p(class="yaddaTime") #{yadda.timestamp}
+                    p(class="yaddaText") #{yadda.text}
+                    each image in images
+                        if(yadda.imgId == image.id)
+                            img(class="imageYadda" src="data:image/" + image.img.contentType + 
+                            ";base64," + image.img.data.toString('base64'), alt="")
+                    each hashtag in yadda.tags
+                        p(class="yaddaTag") #{hashtag}
+                    if(yadda.replies.length > 0)
+                        a(href="/yadda?id=" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
+                    if(replies.length > 0)
+                        each reply in replies
+                            if(reply.yaddaId == yadda.id)
+                                p #{reply.createdByName}
+                                p #{reply.content}
+
+                    form(action="/" + yadda.id, method="post") 
+                        input(type="text", name="reply")
+                        input(type="submit", value="Reply")
+    div(class="column")
+        nav(class="navigationYadda")
+            ul
+                li
+                a(href="/") Home
+                li
+                if loggedin 
+                    a(href="/users/logout") Log out
+                else
+                    a(href="/users/login") Login
+        div(id="trendsAndProfiles")
+            h3 Trends
             
