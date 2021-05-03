@@ -1,14 +1,18 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+  block head
+    head
+      title= title
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
   body
     header
-      nav
+      nav(class="navigation")
         ul
           li
-            a(href="/") Home
+            a(href="/") Home #{styleSpecific}
           li
             if loggedin 
               a(href="/users/logout") Log out

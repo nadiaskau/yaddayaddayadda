@@ -1,0 +1,30 @@
+.navigation{
+    display: none;
+}
+
+#loginContainer, #createUserContainer{
+    width: 45%;
+}
+
+#loginForm, #createUserForm{
+    width: 100%;
+}
+
+#loginForm{
+    margin-top: 10%;
+}
+
+main{
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#loginButton, #createUserButton{
+    align-self: flex-end;
+}
+
+#createUserButton{
+    width: 120px;
+}
