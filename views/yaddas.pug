@@ -17,6 +17,10 @@ block content
             p(class="yaddaName") #{yadda.createdByName}
             p(class="yaddaTime") #{yadda.timestamp}
             p(class="yaddaText") #{yadda.text}
+            each image in images
+                if(yadda.imgId == image.id)
+                    img(class="imageYadda" src="data:image/" + image.img.contentType + 
+                    ";base64," + image.img.data.toString('base64'), alt="")
             each hashtag in yadda.tags
                 p(class="yaddaTag") #{hashtag}
             if(yadda.replies.length > 0)

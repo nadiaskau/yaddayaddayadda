@@ -4,6 +4,7 @@ const handler = require('../models/yadda/yaddaHandler');
 const handlerTag = require('../models/tag/tagHandler');
 const handlerAvatar = require('../models/avatar/avatarHandler');
 const handlerReply = require('../models/reply/replyHandler');
+const handlerImage = require('../models/image/imageHandler');
 const auth = require('../lib/auth');
 var image = require('../lib/image');
 
@@ -12,13 +13,14 @@ router.get('/',  auth.ensureAuthenticated, async function (req, res) {
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
-
+  let images = await handlerImage.readImages(); 
 
     res.render('yaddas', {
       title: 'YaddaYaddaYadda',
       tags: tags,
       avatars: avatars,
       yaddas: yaddas,
+      images: images,
       replies: "",
       loggedin: true
     });
