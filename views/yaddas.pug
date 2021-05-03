@@ -12,7 +12,8 @@ block content
         div(class="yadda" id=yadda.id)
             each avatar in avatars
                 if(yadda.avatarId == avatar.id)
-                    img(class="avatarYadda" src="data:image/" + avatar.img.contentType + ";base64," + avatar.img.data.toString('base64'), alt="")
+                    img(class="avatarYadda" src="data:image/" + avatar.img.contentType + 
+                    ";base64," + avatar.img.data.toString('base64'), alt="")
             p(class="yaddaName") #{yadda.createdByName}
             p(class="yaddaTime") #{yadda.timestamp}
             p(class="yaddaText") #{yadda.text}
