@@ -45,17 +45,24 @@ router.get('/yadda', auth.ensureAuthenticated, async function(req, res, next){
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas(); //read all posts 
-
-  res.render('yaddas', {
-    title: 'YaddaYaddaYadda',
-    tags: tags,
-    avatars: avatars,
-    yaddas: yaddas, 
-    replies: replies,
-    loggedin: true
-  });
+  let images = await handlerImage.readImages(); 
+  let following = await handlerUser.findUserwithId(req.session.passport.user);
+  following = following.following; 
+  let usersQuery = {$and: [{_id: { $ne: req.session.passport.user}}, {_id: {$nin: following}}]}; //find all users except the loggedin user
+  let users = await handlerUser.findUsers(usersQuery); 
   
-}) 
+    res.render('yaddas', {
+      title: 'YaddaYaddaYadda',
+      tags: tags,
+      avatars: avatars,
+      yaddas: yaddas,
+      images: images,
+      replies: replies,
+      users: users,
+      loggedin: true
+    });
+});
+
 
 router.post('/:yadda', async function (req, res, next) {
   let savedReply = await handlerReply.createReply(req, res);
