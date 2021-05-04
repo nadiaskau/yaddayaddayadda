@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    if(followers.length > 0)
+        h3 Your followers
+        each follower in followers 
+            p #{follower.name}
+    if(following.length > 0)
+        h3 You are following:
+        each user in following 
+            p #{user.name}
+            button(class="button" style="margin:0") Unfollow

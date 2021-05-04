@@ -59,7 +59,6 @@ router.get('/confirmation/:token', (req, res) => {
 });
 
 router.get('/follow', async function(req, res){
-  console.log(req.query);
   await handler.updateUser(req, res, 
     {_id: req.session.passport.user}, 
     {$push: {following: req.query.id}});
@@ -67,6 +66,14 @@ router.get('/follow', async function(req, res){
     {_id: req.query.id}, 
     {$push: {followers: req.session.passport.user}})
   res.redirect('../../')
+})
+
+router.get('/following', async function(req, res){
+  let user = await handler.findUserwithId(req.session.passport.user); 
+  let following = await handler.findUsers({_id: {$in: user.following}}); 
+  let followers = await handler.findUsers({_id: {$in: user.followers}}); 
+  console.log(following);
+  res.render('following', {following: following, followers: followers});
 })
 
 // Logout
