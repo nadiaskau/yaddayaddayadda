@@ -47,7 +47,8 @@ exports.createYadda = async function (req, res) {
       createdBy: req.session.passport.user, 
       text: req.body.text,
       tags: [savedTag.id], 
-      imgId: savedImage.id
+      imgId: savedImage.id,
+      timestamp: Date.now()
       
     });
     //No picture in the post
@@ -55,7 +56,8 @@ exports.createYadda = async function (req, res) {
     yadda = new model.Yadda({
       createdBy: req.session.passport.user, 
       text: req.body.text,
-      tags: [savedTag.id]
+      tags: [savedTag.id],
+      timestamp: Date.now()
     });
   }
 
