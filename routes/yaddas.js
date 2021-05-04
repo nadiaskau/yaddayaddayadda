@@ -48,7 +48,6 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
 });
 
 router.post('/', image.upload.single('img'), function (req, res, next) {
-  console.log(req.file);
   handler.createYadda(req);
   res.redirect('/');
 });
