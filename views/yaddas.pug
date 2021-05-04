@@ -68,4 +68,6 @@ block content
                 a(href="/users/follow?id=" + user.id)
                     button(class="button") Follow
             h3 Trends
+            each tag in tags
+                a(href="/tag?tag=" + tag.id) #{tag.name}
             
