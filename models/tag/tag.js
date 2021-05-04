@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const tagSchema = mongoose.Schema({
-    name: String, 
+    name: {type: String, unique: true}, 
     createdBy: mongoose.Schema.Types.ObjectId, 
 });
 

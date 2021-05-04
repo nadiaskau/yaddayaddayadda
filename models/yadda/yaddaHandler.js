@@ -3,6 +3,7 @@ const model = require('./yadda');
 const modelTag = require('../tag/tag');
 const modelUser = require('../user/user');
 const modelImage = require('../image/image');
+const handlerTag = require('../tag/tagHandler');
 var fs = require('fs');
 var path = require('path');
 
@@ -15,15 +16,26 @@ exports.createYadda = async function (req, res) {
   }
   });
   let savedImage = await mongooseWrap.saveAndReturn(image); 
+  let tagname = req.body.tag;
+  if(req.body.tag.charAt(0) !== "#") {
+    tagname = "#" + req.body.tag; 
+  }
 
-    let yadda = new model.Yadda({
-      createdBy: req.session.passport.user, 
-      text: req.body.text,
-      tags: [req.body.tags], 
-      imgId: savedImage.id
-    });
-  
-    await mongooseWrap.save(yadda);
+  let tag = new modelTag.Tag({
+      name : tagname,
+      createdBy: req.session.passport.user
+  });
+
+  let savedTag = await mongooseWrap.saveAndReturn(tag);
+
+  let yadda = new model.Yadda({
+    createdBy: req.session.passport.user, 
+    text: req.body.text,
+    tags: [savedTag.id], 
+    imgId: savedImage.id
+  });
+
+  await mongooseWrap.save(yadda);
     
   };
 

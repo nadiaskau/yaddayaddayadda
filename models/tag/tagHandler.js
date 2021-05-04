@@ -10,3 +10,20 @@ exports.readTags = async function(req, res, query){
         console.log(error);
     }
   };
+
+
+  exports.saveTag = async function(tagname, req, res){
+
+    if(tagname.charAt(0) !== "#") {
+        tagname = "#" + tagname; 
+      }
+
+      let tag = new model.Tag({
+          name : tagname,
+          createdBy: req.session.passport.user
+      });
+
+      let savedTag = await mongooseWrap.saveAndReturn(tag);
+
+      return savedTag;
+  }
