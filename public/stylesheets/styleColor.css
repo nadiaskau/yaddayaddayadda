@@ -5,7 +5,7 @@ body {
 }
 
 a {
-  color: #5b88c2;
+  color: #e705c9;
 }
 
 .class {
@@ -29,7 +29,7 @@ a {
 
 .button {
   color: white;
-  background-color: #5b88c2;
+  background-color: #e705c9;
   border: none;
   border-radius: 20px;
   height: 40px;
@@ -42,7 +42,7 @@ a {
 
 .button:hover {
   cursor: pointer;
-  background-color: #3e69a1;
+  background-color: #8b0a7a;
 }
 
 .avatarYadda {
