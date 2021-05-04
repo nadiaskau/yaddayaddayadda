@@ -19,6 +19,8 @@ block content
                 each tag in tags
                     option(value=tag.id) #{tag.name}
             input(type="submit", value="Yadda" class="classicButton")
+        a(href="/") Timeline
+        a(href="/timelineFollowed") Followed
         each yadda in yaddas 
             div(class="yadda" id=yadda.id)
                 div(class="avatar")

@@ -28,9 +28,8 @@ exports.createYadda = async function (req, res) {
   };
 
   //Read all our yaddas
-exports.readYaddas = async function(req, res){
+exports.readYaddas = async function(query){
     try {
-    let query = {};
     let sortQuery = {timestamp: -1};
     let yaddas = await mongooseWrap.retrieveSorted(model.Yadda, query, sortQuery);
     for (let i = 0; i < yaddas.length; i++) {
