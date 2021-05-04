@@ -2,8 +2,10 @@ extends layout
 
 block head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/style.css' id="pagestyle")
     link(rel='stylesheet', href='/stylesheets/yadda.css')
+    link(rel='stylesheet', href='/stylesheets/slider.css')
+    script(src="/scripts/client.js" defer) 
 
 block content
     
@@ -54,6 +56,10 @@ block content
                     a(href="/") Home
                 li
                     a(href="/users/following") Following/followers
+                li
+                    label(class="switch")
+                        input(type="checkbox" id="switch" checked)
+                        span(class="slider round")
                 li
                 if loggedin 
                     a(href="/users/logout") Log out

@@ -1,0 +1,50 @@
+body {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  background-color: red;
+}
+
+a {
+  color: #5b88c2;
+}
+
+.class {
+  font-weight: bold;
+}
+
+.flexParent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputLarge {
+  border: 1px solid #c8c8c8;
+  height: 2em;
+  color: #c8c8c8;
+  width: 100%;
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+.button {
+  color: white;
+  background-color: #5b88c2;
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  width: 80px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 1%;
+  margin-bottom: 10%;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #3e69a1;
+}
+
+.avatarYadda {
+  width: 10em;
+}
