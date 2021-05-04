@@ -6,9 +6,9 @@ const handler = require('../models/user/userHandler');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { forwardAuthenticated } = require('../lib/auth');
+const { ensureAuthenticated } = require('../lib/auth');
 var image = require('../lib/image');
 
-/* GET users listing. */
 router.get('/createuser', forwardAuthenticated, function (req, res, next) {
   res.render('createuser', { title: 'Create user', loggedin: false });
 });
@@ -26,10 +26,12 @@ router.post('/login', function (req, res, next) {
   (req, res, next);
 });
 
+//Pending user
 router.get('/pending', forwardAuthenticated, function (req, res, next) {
   res.render('pending', { title: 'Pending', loggedin: false});
 });
 
+//Register
 router.post('/createuser', image.upload.single('avatar'), async function (req, res) {
 
   if (req.body.password == req.body.passwordRepeat) {
@@ -41,6 +43,7 @@ router.post('/createuser', image.upload.single('avatar'), async function (req, r
   }
 });
 
+//URL in confirmation email
 router.get('/confirmation/:token', (req, res) => {
   try {
     const verifiedEmail = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
@@ -58,21 +61,24 @@ router.get('/confirmation/:token', (req, res) => {
   return res.redirect('http://localhost:3000/');
 });
 
-router.get('/follow', async function(req, res){
+//Follow a certain user
+router.get('/follow', ensureAuthenticated, async function(req, res){
+  //Update loggedin user with push to 'following'
   await handler.updateUser(req, res, 
     {_id: req.session.passport.user}, 
     {$push: {following: req.query.id}});
+  //Update the followed user with push to 'followers' 
   await handler.updateUser(req, res, 
     {_id: req.query.id}, 
     {$push: {followers: req.session.passport.user}})
   res.redirect('../../')
 })
 
-router.get('/following', async function(req, res){
+//List of followers and followed users
+router.get('/following', ensureAuthenticated, async function(req, res){
   let user = await handler.findUserwithId(req.session.passport.user); 
   let following = await handler.findUsers({_id: {$in: user.following}}); 
   let followers = await handler.findUsers({_id: {$in: user.followers}}); 
-  console.log(following);
   res.render('following', {following: following, followers: followers});
 })
 
