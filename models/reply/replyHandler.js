@@ -2,13 +2,15 @@ const mongooseWrap = require('../../lib/mongooseWrap');
 const modelYadda = require('../yadda/yadda');
 const modelUser = require('../user/user');
 const model = require('./reply');
+const date = require('../../lib/date');
 
 
 exports.createReply = async function (req, res) {
     let reply = new model.Reply({
-        yaddaId : req.params.yadda, 
+      yaddaId : req.params.yadda, 
       createdBy: req.session.passport.user,
       content: req.body.reply,
+      timestamp: date.formatedDate()
     });
     
     let savedReply = await mongooseWrap.saveAndReturn(reply); 

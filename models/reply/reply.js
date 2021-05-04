@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const replySchema = mongoose.Schema({
     yaddaId: mongoose.Schema.Types.ObjectId,
     createdBy: mongoose.Schema.Types.ObjectId,
-    timestamp: {type: Date, default: Date.now()}, 
+    timestamp: {type: String}, 
     content: String,
     createdByName: {type: String, default: null}
 });

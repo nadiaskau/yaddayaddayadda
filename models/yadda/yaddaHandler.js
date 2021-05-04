@@ -5,7 +5,7 @@ const modelUser = require('../user/user');
 const modelImage = require('../image/image');
 var fs = require('fs');
 var path = require('path');
-
+const date = require('../../lib/date');
 
 exports.createYadda = async function (req, res) {
   let yadda;
@@ -48,7 +48,7 @@ exports.createYadda = async function (req, res) {
       text: req.body.text,
       tags: [savedTag.id], 
       imgId: savedImage.id,
-      timestamp: Date.now()
+      timestamp: date.formatedDate()
       
     });
     //No picture in the post
@@ -57,7 +57,7 @@ exports.createYadda = async function (req, res) {
       createdBy: req.session.passport.user, 
       text: req.body.text,
       tags: [savedTag.id],
-      timestamp: Date.now()
+      timestamp: date.formatedDate()
     });
   }
 

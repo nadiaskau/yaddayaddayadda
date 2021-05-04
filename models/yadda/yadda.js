@@ -4,7 +4,7 @@ const yaddaSchema = mongoose.Schema({
     createdBy: mongoose.Schema.Types.ObjectId, 
     createdByName: {type: String, default: null},
     avatarId: {type: mongoose.Schema.Types.ObjectId, default: null},
-    timestamp: {type: Date},
+    timestamp: {type: String},
     text: String, 
     imgId: mongoose.Schema.Types.ObjectId, 
     tags: [mongoose.Schema.Types.ObjectId], 
