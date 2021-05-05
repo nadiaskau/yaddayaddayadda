@@ -25,6 +25,9 @@ exports.createUser = async function (req, res) {
     avatarId: savedAvatar.id
   });
 
+  //Make sure the email is lowercase
+  user.email = user.email.toLowerCase(); 
+
   let saved = await mongooseWrap.save(user);
   if (saved) {
     mailservice.sendEmail(req.body.email);

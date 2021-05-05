@@ -8,6 +8,11 @@ const passport = require('passport');
 const { forwardAuthenticated } = require('../lib/auth');
 const { ensureAuthenticated } = require('../lib/auth');
 var image = require('../lib/image');
+const { check, body,validationResult } = require('express-validator');
+var bodyparser = require('body-parser');
+
+
+
 
 router.get('/createuser', forwardAuthenticated, function (req, res, next) {
   res.render('createuser', { title: 'Create user', loggedin: false });
@@ -17,7 +22,11 @@ router.get('/login', forwardAuthenticated, function (req, res, next) {
   res.render('login', { title: 'Your credentials', loggedin: false, styleSpecific: "login" });
 });
 
-router.post('/login', function (req, res, next) {
+
+router.post('/login',   
+  //Passport authentication of login
+  function (req, res, next) {
+    console.log(req.body);
   passport.authenticate('local', {
     successRedirect: '../',
     failureRedirect: '/users/login',
@@ -32,8 +41,13 @@ router.get('/pending', forwardAuthenticated, function (req, res, next) {
 });
 
 //Register
-router.post('/createuser', image.upload.single('avatar'), async function (req, res) {
-
+router.post('/createuser', 
+  //Validation - remove whitespace from email
+  body('email').trim(),
+  //Uploading our picture
+  image.upload.single('avatar'), 
+  //Checking password and creating user
+  async function (req, res) {
   if (req.body.password == req.body.passwordRepeat) {
     await handler.createUser(req);
     res.redirect('/users/pending');

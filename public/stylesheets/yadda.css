@@ -11,7 +11,7 @@
 
 main{
     display: flex;
-    background-color: #74f17b;
+    background-color: #E3E3E3;
 }
 
 .avatarYadda{
@@ -27,7 +27,7 @@ main{
 }
 
 .yadda{
-    background-color: rgb(59, 123, 207);
+    background-color: white;
     margin-bottom: 2px;
     padding: 2%;
     display: flex;
@@ -48,7 +48,7 @@ main{
 }
 
 .yaddaTag{
-    color: #ffffff;
+    color: #2d6ab9;
     
 }
 

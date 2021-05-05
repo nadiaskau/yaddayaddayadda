@@ -16,6 +16,8 @@ var db = mongoose.connection;
 
 var app = express();
 
+
+
 // Passport Config
 require('./config/passport')(passport);
 
@@ -27,6 +29,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//app.use(bodyparser.text());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Express session

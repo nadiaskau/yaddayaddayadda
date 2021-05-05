@@ -45,7 +45,7 @@ exports.createYadda = async function (req, res) {
     savedImage = await mongooseWrap.saveAndReturn(image);
     yadda = new model.Yadda({
       createdBy: req.session.passport.user,
-      text: req.body.text,
+      text: req.body.content,
       tags: [savedTag.id],
       imgId: savedImage.id,
       timestamp: date.formatedDate(),
@@ -54,7 +54,7 @@ exports.createYadda = async function (req, res) {
   } else {
     yadda = new model.Yadda({
       createdBy: req.session.passport.user,
-      text: req.body.text,
+      text: req.body.content,
       tags: [savedTag.id],
       timestamp: date.formatedDate(),
     });

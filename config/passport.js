@@ -1,5 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+var sanitize = require('mongo-sanitize');
 
 // Load User model
 const model = require('../models/user/user');
@@ -7,6 +8,9 @@ const model = require('../models/user/user');
 module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+      //Make sure the email is lowercase
+      email = email.toLowerCase(); 
+
       // Match user
       model.User.findOne({
         email: email
@@ -17,7 +21,7 @@ module.exports = function(passport) {
         if(user.activated == false) { //if the user is not activated
           return done(null, false, { message: 'Check your email for verification link' });
         }
-
+        console.log(user);
         // Match password
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
