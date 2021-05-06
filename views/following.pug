@@ -1,6 +1,7 @@
 extends layout 
 
 block content
+    include error.pug
     if(followers.length > 0)
         h3 Your followers
         each follower in followers 
