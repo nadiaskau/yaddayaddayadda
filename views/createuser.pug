@@ -7,11 +7,11 @@ block content
     div(class="largeLogo")
         img(src="../images/logo.png")
         p(class="largeLogoText") YaddaYaddaYadda
-
+    include error.pug
     div(class="flexParent" id="createUserContainer")
         form(method="post" action="" enctype="multipart/form-data" class="flexParent" id="createUserForm")
-            input(type="text", name="name" placeholder="Name" class="inputLarge" required)
-            input(type="email", name="email" placeholder="Email" class="inputLarge" required)
+            input(type="text", name="name" placeholder="Name" class="inputLarge" value=name required)
+            input(type="email", name="email" placeholder="Email" class="inputLarge" value=email required)
             input(type="password", name="password" class="inputLarge" placeholder="Password" required)
             input(type="password", name="passwordRepeat" placeholder="Repeat password" class="inputLarge" required)
             input(type="file", name="avatar" accept=".png, .jpeg, .jpg" required)

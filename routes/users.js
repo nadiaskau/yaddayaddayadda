@@ -15,18 +15,22 @@ router.get('/createuser', forwardAuthenticated, function (req, res, next) {
 
 router.get('/login', forwardAuthenticated, function (req, res, next) {
   res.render('login', { title: 'Your credentials', loggedin: false, styleSpecific: "login" });
+  
 });
 
 
-router.post('/login',   
+router.post('/login',  
   //Passport authentication of login
   function (req, res, next) {
+    
   passport.authenticate('local', {
     successRedirect: '../',
     failureRedirect: '/users/login',
     failureFlash: true
   })
+  
   (req, res, next);
+    
 });
 
 //Pending user
@@ -40,12 +44,30 @@ router.post('/createuser',
   image.upload.single('avatar'), 
   //Checking password and creating user
   async function (req, res) {
-  if (req.body.password == req.body.passwordRepeat) {
+  const { name, email, password, passwordRepeat } = req.body;
+  let errors = []; 
+  //Making sure the passwords match
+  if (password != passwordRepeat) {
+    errors.push({msg: 'Passwords do not match'}); 
+  } 
+  //Password must be more than 6 characters
+  if (password.length < 6) {
+    errors.push({ msg: 'Password must be at least 6 characters' });
+  }
+  
+  if(errors.length > 0){
+    //Render
+    res.render('createuser', {
+      title: 'Create user', 
+      loggedin: false,
+      errors,
+      name,
+      email
+    });
+  } else {
     await handler.createUser(req);
     res.redirect('/users/pending');
-  } else {
-    res.render('createuser', { message: 'Passwords do not match' });
-    // TODO - Logger / flash
+    
   }
 });
 
@@ -91,7 +113,7 @@ router.get('/following', ensureAuthenticated, async function(req, res){
 // Logout
 router.get('/logout', (req, res) => {
   req.logout();
-  //req.flash('success_msg', 'You are logged out');
+  req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
 });
 

@@ -1,6 +1,15 @@
-extends layout
+if(error != '')
+  p= error
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+if(error_msg != '')
+  p= error_msg
+
+
+if(success_msg != '')
+  p= success_msg
+
+if(errors)
+  each error in errors
+    p= error.msg
+
+  
