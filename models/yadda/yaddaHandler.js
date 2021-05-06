@@ -39,7 +39,7 @@ exports.createYadda = async function (req, res) {
     let image = new modelImage.Image({
       img: {
         data: fs.readFileSync(path.join('./uploads/' + req.file.filename)),
-        contentType: 'image/png',
+        contentType: req.file.mimetype,
       },
     });
     savedImage = await mongooseWrap.saveAndReturn(image);

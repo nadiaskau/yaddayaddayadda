@@ -55,11 +55,9 @@ router.post('/',
   image.upload.single('img'),
   //Creating and saving the yadda
   function (req, res, next) {
-
     handler.createYadda(req);
     //Refreshing the page to get new content
     res.redirect('/');
-
   });
 
 
