@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var validate = require('mongoose-validator')
 
 const userSchema = new mongoose.Schema({
     name: {type: String, required: true},

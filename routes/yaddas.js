@@ -8,12 +8,6 @@ const handlerImage = require('../models/image/imageHandler');
 const handlerUser = require('../models/user/userHandler');
 const auth = require('../lib/auth');
 var image = require('../lib/image');
-var bodyparser = require('body-parser');
-const {
-  body,
-  validationResult
-} = require('express-validator');
-
 
 router.get('/', auth.ensureAuthenticated, async function (req, res) {
   let tags = await handlerTag.readTags();
