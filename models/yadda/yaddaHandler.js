@@ -22,7 +22,7 @@ exports.createYadda = async function (req, res) {
 
   //If tag doesn't exists
   if (tagExist.length <= 0) {
-    console.log('Halløj');
+    
     let tag = new modelTag.Tag({
       name: tagname,
       createdBy: req.session.passport.user,

@@ -208,10 +208,5 @@ router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
   });
 });
 
-//Timeline for specific tag
-router.post('/theme/switch', async function (req, res, next) {
-  console.log(req.body);
-  res.redirect('/');
-});
 
 module.exports = router;

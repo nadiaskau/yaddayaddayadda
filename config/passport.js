@@ -21,7 +21,7 @@ module.exports = function(passport) {
         if(user.activated == false) { //if the user is not activated
           return done(null, false, { message: 'Check your email for verification link' });
         }
-        console.log(user);
+        
         // Match password
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
