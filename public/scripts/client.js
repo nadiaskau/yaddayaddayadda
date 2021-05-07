@@ -11,7 +11,7 @@ window.onload = function() {
 async function getUser(url = '/users/theme'){
   const user = await fetch(url, {
     method:'GET'})
-    return user.json(); 
+    return user.json();
 }
 
 //Sending theme option
