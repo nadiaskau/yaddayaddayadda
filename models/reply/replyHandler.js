@@ -24,6 +24,7 @@ exports.createReply = async function (req, res) {
     for (let i = 0; i < replies.length; i++) {
       let user = await mongooseWrap.retrieveWithId(modelUser.User, replies[i].createdBy);
       replies[i].createdByName = user.name;
+      replies[i].avatarId = user.avatarId; 
   }
     return replies; 
 };

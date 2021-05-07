@@ -9,6 +9,7 @@ const handlerUser = require('../models/user/userHandler');
 const auth = require('../lib/auth');
 var image = require('../lib/image');
 
+//ALl of our yaddas
 router.get('/', auth.ensureAuthenticated, async function (req, res) {
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
@@ -60,7 +61,7 @@ router.post('/',
     res.redirect('/');
   });
 
-
+/*Route for specific yadda with replies*/
   router.get('/yadda', auth.ensureAuthenticated, async function (req, res, next) {
     let yadda = await handler.readYaddaWithId(req.query.id);
     var replies = await handlerReply.readRepliesByIds(yadda.replies);

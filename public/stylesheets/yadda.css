@@ -21,6 +21,13 @@ main{
     border-radius: 45px;
 }
 
+.avatarReply{
+    width: 60px; 
+    height: 60px; 
+    object-fit: cover;
+    border-radius: 30px;
+}
+
 .imageYadda{
     max-width: 840px;
     object-fit: cover;

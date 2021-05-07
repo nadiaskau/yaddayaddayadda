@@ -5,7 +5,8 @@ const replySchema = mongoose.Schema({
     createdBy: mongoose.Schema.Types.ObjectId,
     timestamp: {type: String}, 
     content: String,
-    createdByName: {type: String, default: null}
+    createdByName: {type: String, default: null},
+    avatarId: {type: mongoose.Schema.Types.ObjectId, default: null}
 });
 
 const Reply = mongoose.model("Reply", replySchema, 'reply');

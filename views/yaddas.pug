@@ -43,6 +43,10 @@ block content
                     if(replies.length > 0)
                         each reply in replies
                             if(reply.yaddaId == yadda.id)
+                                each avatar in avatars
+                                    if(reply.avatarId == avatar.id)
+                                        img(class="avatarReply" src="data:image/" + avatar.img.contentType + 
+                                        ";base64," + avatar.img.data.toString('base64'), alt="")
                                 p #{reply.createdByName}
                                 p #{reply.content}
 
