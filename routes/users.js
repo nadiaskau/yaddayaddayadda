@@ -18,10 +18,13 @@ router.get('/login', forwardAuthenticated, function (req, res, next) {
   
 });
 
-
 router.get('/theme', ensureAuthenticated, async function (req, res, next) {
   let user = await handler.findUserwithId(req.session.passport.user); 
   res.json(user); 
+});
+
+router.post('/theme', async function (req, res, next) {
+  await handler.updateUser(req, res, {_id: req.session.passport.user}, {$set: req.body});
 });
 
 router.post('/login',  

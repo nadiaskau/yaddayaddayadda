@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     activated: {type: Boolean, default: false},
     avatarId: {type: mongoose.Schema.Types.ObjectId}, 
     followers: {type:[mongoose.Schema.Types.ObjectId]}, 
-    following: {type:[mongoose.Schema.Types.ObjectId]}
+    following: {type:[mongoose.Schema.Types.ObjectId]}, 
+    theme: {type: Number, default: 1, enum: [0,1]}
 });
 
 const User = mongoose.model("User", userSchema, 'user');
