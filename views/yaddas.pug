@@ -18,7 +18,8 @@ block content
         div(id="postContainer")
             img(id="userAvatar" class="avatarYadda" src="data:image/" + avatarUser.img.contentType + ";base64," + avatarUser.img.data.toString('base64'), alt="")
             form(action="", method="post" enctype="multipart/form-data" id="yaddaForm")
-                input(id="yaddaText" type="text", name="content" maxlength=167 placeholder="What do you want tell?" required)
+                div
+                    input(id="yaddaText" type="text", name="content" maxlength=167 placeholder="What do you want tell?" required)
                 div(id="createYaddaText")
                     input(type="file" name="img" accept=".png, .jpeg, .jpg")
                     input(type="text" name="tag" placeholder="Tag" required)
