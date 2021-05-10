@@ -44,6 +44,7 @@ main {
 
 #createYaddaText {
   display: flex;
+  justify-content: space-between;
 }
 
 .avatarReply {

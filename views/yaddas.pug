@@ -21,8 +21,9 @@ block content
                 div
                     input(id="yaddaText" type="text", name="content" maxlength=167 placeholder="What do you want tell?" required)
                 div(id="createYaddaText")
-                    input(type="file" name="img" accept=".png, .jpeg, .jpg")
-                    input(type="text" name="tag" placeholder="Tag" required)
+                    div 
+                        input(type="file" name="img" accept=".png, .jpeg, .jpg")
+                        input(type="text" name="tag" placeholder="Tag" required)
                     input(type="submit", value="Yadda" id="yaddaButton" class="button")
         div(id="timelineHeaders")
             a(href="/" tabindex="1") Timeline
