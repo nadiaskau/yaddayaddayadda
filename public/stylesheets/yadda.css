@@ -1,101 +1,146 @@
-#yaddaContainer{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1.5;
+#yaddaContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1.5;
+  margin: 0 7px 0 7px;
+}
+#yaddaContainer a {
+  margin-right: 1%;
 }
 
-.column{
-    flex-grow: 1;
-    
+#yaddaContainer a[tabindex]:focus {
+  color: tomato;
+  outline: none;
 }
 
-main{
-    display: flex;
-    background-color: #E3E3E3;
+#timelineHeaders {
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+  padding-top: 8px;
+  margin-top: 10px;
 }
 
-.avatarYadda{
-    width: 90px; 
-    height: 90px; 
-    object-fit: cover;
-    border-radius: 45px;
+.column {
+  flex-grow: 1;
 }
 
-.avatarReply{
-    width: 60px; 
-    height: 60px; 
-    object-fit: cover;
-    border-radius: 30px;
+main {
+  display: flex;
+  background-color: #e3e3e3;
 }
 
-.imageYadda{
-    max-width: 840px;
-    object-fit: cover;
+.avatarYadda {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 45px;
 }
 
-.yadda{
-    background-color: white;
-    margin-bottom: 2px;
-    padding: 2%;
-    display: flex;
+#userAvatar {
+  margin-top: 20px;
+  margin-right: 25px;
 }
 
-.avatar{
-    flex-grow: 0;
-    margin-right: 2%;
+#createYaddaText {
+  display: flex;
 }
 
-.yaddaPost{
-    flex-grow: 1;
+.avatarReply {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 30px;
 }
 
-.yaddaName{
-    font-weight: bold;
-    font-size: 20px;
+.imageYadda {
+  max-width: 840px;
+  object-fit: cover;
 }
 
-.yaddaTag{
-    color: #2d6ab9;
-    
+.yadda {
+  background-color: white;
+  margin-bottom: 2px;
+  padding: 30px;
+  display: flex;
 }
 
-.navigation{
-    display: none;
+.avatar {
+  flex-grow: 0;
+  margin-right: 25px;
 }
 
-.navigationYadda, .logo, #yaddaForm{
-    height: 150px;
-    background-color: white;
+.yaddaPost {
+  flex-grow: 1;
 }
 
-.navigationYadda ul{
-    margin: 0
+.yaddaName {
+  font-weight: bold;
+  font-size: 20px;
 }
 
-#yaddaText{
-    border: none;
-    width: 100%;
+.yaddaTag {
+  color: #2d6ab9;
 }
 
-#adds{
-    text-align: center;
-    color: white;
+.navigation {
+  display: none;
 }
 
-#yaddaForm{
-    width: 100%;
+.navigationYadda,
+.logo,
+#postContainer {
+  height: 150px;
+  background-color: white;
 }
 
-#yaddaForm input{
-   
+.navigationYadda,
+.logo {
+  padding-bottom: 2%;
 }
 
-#postContainer{
-    display: flex;
-    padding: 2%;
-    background-color: white;
+.navigationYadda ul {
+  margin: 0;
 }
 
-#yaddaButton{
-    margin: 0;    
+#yaddaText {
+  border: none;
+  width: 100%;
+  padding: 0;
+  height: 60px;
+}
+
+#adds {
+  text-align: center;
+  color: white;
+}
+
+#yaddaForm {
+  width: 100%;
+}
+
+#yaddaForm input {
+}
+
+#postContainer {
+  display: flex;
+  background-color: white;
+  padding-left: 30px;
+  padding-bottom: 8px;
+}
+
+#yaddaButton {
+  margin: 0;
+}
+
+#trendDiv,
+#followDiv {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px;
+}
+
+#followDiv {
+  margin-bottom: 2%;
 }

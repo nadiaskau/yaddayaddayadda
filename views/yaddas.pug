@@ -19,11 +19,13 @@ block content
             img(id="userAvatar" class="avatarYadda" src="data:image/" + avatarUser.img.contentType + ";base64," + avatarUser.img.data.toString('base64'), alt="")
             form(action="", method="post" enctype="multipart/form-data" id="yaddaForm")
                 input(id="yaddaText" type="text", name="content" maxlength=167 placeholder="What do you want tell?" required)
-                input(type="file" name="img" accept=".png, .jpeg, .jpg")
-                input(type="text" name="tag" placeholder="Tag" required)
-                input(type="submit", value="Yadda" id="yaddaButton" class="button")
-        a(href="/") Timeline
-        a(href="/timelineFollowed") Followed
+                div(id="createYaddaText")
+                    input(type="file" name="img" accept=".png, .jpeg, .jpg")
+                    input(type="text" name="tag" placeholder="Tag" required)
+                    input(type="submit", value="Yadda" id="yaddaButton" class="button")
+        div(id="timelineHeaders")
+            a(href="/" tabindex="1") Timeline
+            a(href="/timelineFollowed" tabindex="2") Followed
         each yadda in yaddas 
             div(class="yadda" id=yadda.id)
                 div(class="avatar")
@@ -73,12 +75,13 @@ block content
                 else
                     a(href="/users/login") Login
         div(id="trendsAndProfiles")
-            h3 Follow
-            each user in users
-                p(class="users") #{user.name}
-                a(href="/users/follow?id=" + user.id)
-                    button(class="button") Follow
-            h3 Trends
-            each tag in tags
-                a(href="/tag?tag=" + tag.id) #{tag.name}
-
+            div(id="followDiv")
+                h3 Follow
+                each user in users
+                    p(class="users") #{user.name}
+                    a(href="/users/follow?id=" + user.id)
+                        button(class="button") Follow
+            div(id="trendDiv")           
+                h3 Trends
+                each tag in tags
+                    a(href="/tag?tag=" + tag.id) #{tag.name}

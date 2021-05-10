@@ -17,10 +17,11 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
   let images = await handlerImage.readImages();
   let user = await handlerUser.findUserwithId(req.session.passport.user);
   let following = user.following;
-  let avatarUser = await handlerAvatar.readAvatar({_id: user.avatarId});
+  let avatarUser = await handlerAvatar.readAvatar({ _id: user.avatarId });
   /*Find all users except the loggedin user and not activated users*/
   let usersQuery = {
-    $and: [{
+    $and: [
+      {
         _id: {
           $ne: req.session.passport.user,
         },
@@ -49,11 +50,12 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
     replies: '',
     users: users,
     loggedin: true,
+    followed: false,
   });
 });
 
-
-router.post('/',
+router.post(
+  '/',
   //Uploading our image
   image.upload.single('img'),
   //Creating and saving the yadda
@@ -61,48 +63,54 @@ router.post('/',
     handler.createYadda(req);
     //Refreshing the page to get new content
     res.redirect('/');
-  });
+  }
+);
 
 /*Route for specific yadda with replies*/
-  router.get('/yadda', auth.ensureAuthenticated, async function (req, res, next) {
-    let yadda = await handler.readYaddaWithId(req.query.id);
-    var replies = await handlerReply.readRepliesByIds(yadda.replies);
-  
-    let tags = await handlerTag.readTags();
-    let avatars = await handlerAvatar.readAvatar();
-    let yaddas = await handler.readYaddas({}); //read all posts
-    let images = await handlerImage.readImages();
-    let user = await handlerUser.findUserwithId(req.session.passport.user);
-    let following = user.following;
-    let avatarUser = await handlerAvatar.readAvatar({_id: user.avatarId});
-    let usersQuery = {
-      $and: [
-        {
-          _id: {
-            $ne: req.session.passport.user,
-          },
+router.get('/yadda', auth.ensureAuthenticated, async function (req, res, next) {
+  let yadda = await handler.readYaddaWithId(req.query.id);
+  var replies = await handlerReply.readRepliesByIds(yadda.replies);
+  let tags = await handlerTag.readTags();
+  let avatars = await handlerAvatar.readAvatar();
+  let yaddas = await handler.readYaddas({}); //read all posts
+  let images = await handlerImage.readImages();
+  let user = await handlerUser.findUserwithId(req.session.passport.user);
+  let following = user.following;
+  let avatarUser = await handlerAvatar.readAvatar({ _id: user.avatarId });
+  let usersQuery = {
+    $and: [
+      {
+        _id: {
+          $ne: req.session.passport.user,
         },
-        {
-          _id: {
-            $nin: following,
-          },
+      },
+      {
+        _id: {
+          $nin: following,
         },
-      ],
-    }; //find all users except the loggedin user
-    let users = await handlerUser.findUsers(usersQuery);
-  
-    res.render('yaddas', {
-      title: 'YaddaYaddaYadda',
-      tags: tags,
-      avatars: avatars,
-      avatarUser: avatarUser[0],
-      yaddas: yaddas,
-      images: images,
-      replies: replies,
-      users: users,
-      loggedin: true,
-    });
+      },
+      {
+        activated: {
+          $ne: false,
+        },
+      },
+    ],
+  }; //find all users except the loggedin user
+  let users = await handlerUser.findUsers(usersQuery);
+
+  res.render('yaddas', {
+    title: 'YaddaYaddaYadda',
+    tags: tags,
+    avatars: avatars,
+    avatarUser: avatarUser[0],
+    yaddas: yaddas,
+    images: images,
+    replies: replies,
+    users: users,
+    loggedin: true,
+    followed: false,
   });
+});
 
 router.post('/:yadda', async function (req, res, next) {
   let savedReply = await handlerReply.createReply(req, res);
@@ -121,33 +129,35 @@ router.get(
   '/timelineFollowed',
   auth.ensureAuthenticated,
   async function (req, res, next) {
-    let following = await handlerUser.findUserwithId(req.session.passport.user);
-    following = following.following;
+    let user = await handlerUser.findUserwithId(req.session.passport.user);
+    let following = user.following;
+    let avatarUser = await handlerAvatar.readAvatar({ _id: user.avatarId });
     let tags = await handlerTag.readTags();
     let avatars = await handlerAvatar.readAvatar();
     let yaddas = await handler.readYaddas({
       createdBy: {
-        $in: following
-      }
+        $in: following,
+      },
     }); //read yaddas from followed users
     let images = await handlerImage.readImages();
 
     /*Find all users except the loggedin user and not activated users*/
     let usersQuery = {
-      $and: [{
+      $and: [
+        {
           _id: {
-            $ne: req.session.passport.user
-          }
+            $ne: req.session.passport.user,
+          },
         },
         {
           _id: {
-            $nin: following
-          }
+            $nin: following,
+          },
         },
         {
           activated: {
-            $ne: false
-          }
+            $ne: false,
+          },
         },
       ],
     };
@@ -157,11 +167,13 @@ router.get(
       title: 'YaddaYaddaYadda',
       tags: tags,
       avatars: avatars,
+      avatarUser: avatarUser[0],
       yaddas: yaddas,
       images: images,
       replies: '',
       users: users,
       loggedin: true,
+      followed: true,
     });
   }
 );
@@ -175,27 +187,28 @@ router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas({
     tags: {
-      $in: followTag
-    }
+      $in: followTag,
+    },
   }); //read yaddas from followed users
   let images = await handlerImage.readImages();
 
   /*Find all users except the loggedin user and not activated users*/
   let usersQuery = {
-    $and: [{
+    $and: [
+      {
         _id: {
-          $ne: req.session.passport.user
-        }
+          $ne: req.session.passport.user,
+        },
       },
       {
         _id: {
-          $nin: following
-        }
+          $nin: following,
+        },
       },
       {
         activated: {
-          $ne: false
-        }
+          $ne: false,
+        },
       },
     ],
   };
@@ -212,6 +225,5 @@ router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
     loggedin: true,
   });
 });
-
 
 module.exports = router;
