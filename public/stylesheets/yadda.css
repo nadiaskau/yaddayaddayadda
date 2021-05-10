@@ -118,10 +118,10 @@ main {
 }
 
 #yaddaForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 #yaddaForm {
@@ -130,7 +130,7 @@ main {
 #postContainer {
   display: flex;
   background-color: white;
-  padding: 0 30px 8px 30px    
+  padding: 0 30px 8px 30px;
 }
 
 #yaddaButton {
@@ -138,8 +138,9 @@ main {
   align-self: flex-end;
 }
 
-#yaddaPic, #yaddaTag{
-    align-self: flex-start;
+#yaddaPic,
+#yaddaTag {
+  align-self: flex-start;
 }
 
 #trendDiv,
@@ -152,4 +153,20 @@ main {
 
 #followDiv {
   margin-bottom: 2%;
+}
+
+#image-upload:hover,
+::-webkit-file-upload-button:hover {
+  cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+  background-image: url(../images/picture_icon.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 34px;
+  width: 34px;
+  background-color: white;
+  color: transparent;
+  border: none;
 }

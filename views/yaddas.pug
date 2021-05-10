@@ -2,6 +2,7 @@ extends layout
 
 block head
     title= title
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css' id="pagestyle")
     link(rel='stylesheet', href='/stylesheets/yadda.css')
     link(rel='stylesheet', href='/stylesheets/slider.css')
@@ -22,7 +23,7 @@ block content
                     input(id="yaddaText" type="text", name="content" maxlength=167 placeholder="What do you want tell?" required)
                 div(id="createYaddaText")
                     div 
-                        input(type="file" name="img" accept=".png, .jpeg, .jpg")
+                        input(type="file" id="image-upload" name="img" accept=".png, .jpeg, .jpg")
                         input(type="text" name="tag" placeholder="Tag" required)
                     input(type="submit", value="Yadda" id="yaddaButton" class="button")
         div(id="timelineHeaders")
