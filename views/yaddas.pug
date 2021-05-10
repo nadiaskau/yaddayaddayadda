@@ -49,32 +49,38 @@ block content
                     if(yadda.replies.length > 0)
                         a(href="/yadda?id=" + yadda.id class="yaddaReplies") Replies: #{yadda.replies.length}
                     if(replies.length > 0)
-                        each reply in replies
-                            if(reply.yaddaId == yadda.id)
-                                each avatar in avatars
-                                    if(reply.avatarId == avatar.id)
-                                        img(class="avatarReply" src="data:image/" + avatar.img.contentType + 
-                                        ";base64," + avatar.img.data.toString('base64'), alt="")
-                                p #{reply.createdByName}
-                                p #{reply.content}
-
+                        div(class="replies")
+                            each reply in replies
+                                if(reply.yaddaId == yadda.id)
+                                    div(class="reply")
+                                        each avatar in avatars
+                                            if(reply.avatarId == avatar.id)
+                                                img(class="avatarReply" src="data:image/" + avatar.img.contentType + 
+                                                ";base64," + avatar.img.data.toString('base64'), alt="")
+                                        div
+                                            p(class="replyName") #{reply.createdByName}
+                                            p #{reply.content}
                     form(action="/" + yadda.id, method="post") 
                         input(type="text", name="reply" required)
                         input(type="submit", value="Reply")
     div(class="column")
         nav(class="navigationYadda")
             ul
+                li  
+                    label Theme 
+                    label(class="switch")
+                        input(type="checkbox" id="switch" checked) 
+                        span(class="slider round")
+                li |
                 li
-                    a(href="/") Home
+                    a(href="/") Home 
+                li |
                 li
                     a(href="/users/following") Following/followers
-                li
-                    label(class="switch")
-                        input(type="checkbox" id="switch" checked)
-                        span(class="slider round")
+                li |
                 li
                 if loggedin 
-                    a(href="/users/logout") Log out
+                    a(href="/users/logout") Log out 
                 else
                     a(href="/users/login") Login
         div(id="trendsAndProfiles")
