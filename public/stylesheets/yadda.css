@@ -45,6 +45,7 @@ main {
 #createYaddaText {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .avatarReply {
@@ -129,8 +130,7 @@ main {
 #postContainer {
   display: flex;
   background-color: white;
-  padding-left: 30px;
-  padding-bottom: 8px;
+  padding: 0 30px 8px 30px    
 }
 
 #yaddaButton {
