@@ -116,7 +116,10 @@ main {
 }
 
 #yaddaForm {
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
 #yaddaForm input {
