@@ -15,8 +15,10 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas({}); //read all posts
   let images = await handlerImage.readImages();
-  let following = await handlerUser.findUserwithId(req.session.passport.user);
-  following = following.following;
+  let user = await handlerUser.findUserwithId(req.session.passport.user);
+  let following = user.following;
+  let avatarUser = await handlerAvatar.readAvatar({_id: user.avatarId});
+  console.log(avatarUser);
   /*Find all users except the loggedin user and not activated users*/
   let usersQuery = {
     $and: [{
@@ -42,6 +44,7 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
     title: 'YaddaYaddaYadda',
     tags: tags,
     avatars: avatars,
+    avatarUser: avatarUser[0],
     yaddas: yaddas,
     images: images,
     replies: '',

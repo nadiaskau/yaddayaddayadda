@@ -8,9 +8,9 @@ exports.createAvatar = async function (req, res) {
  
 };
 
-exports.readAvatar = async function(req, res){
+exports.readAvatar = async function(query){
     try {
-        let avatar = await mongooseWrap.retrieve(model.Avatar);
+        let avatar = await mongooseWrap.retrieve(model.Avatar, query);
         return avatar;
         
     } catch (error) {

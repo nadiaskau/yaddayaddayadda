@@ -71,3 +71,31 @@ main{
 .navigationYadda ul{
     margin: 0
 }
+
+#yaddaText{
+    border: none;
+    width: 100%;
+}
+
+#adds{
+    text-align: center;
+    color: white;
+}
+
+#yaddaForm{
+    width: 100%;
+}
+
+#yaddaForm input{
+   
+}
+
+#postContainer{
+    display: flex;
+    padding: 2%;
+    background-color: white;
+}
+
+#yaddaButton{
+    margin: 0;    
+}
