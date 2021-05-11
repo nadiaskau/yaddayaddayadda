@@ -96,7 +96,7 @@ block content
                 h3 Follow
                 each user in users
                     div(class="userFollow")
-                        button(class="button") Follow
+                        button(class="button" class="followButton") Follow
                             a(href="/users/follow?id=" + user.id)
                         p(class="users") #{user.name}
                         

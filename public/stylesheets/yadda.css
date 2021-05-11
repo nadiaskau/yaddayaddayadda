@@ -201,4 +201,22 @@ main {
 .userFollow {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #c8c8c8;
+  padding: 5px 0 5px 0;
+}
+
+.users, .followButton{
+    margin-bottom: 0;
+}
+
+.followButton{
+    margin-right: 10px;
+    background-color: white;
+    border: 3px solid #5B88C2;
+    color: #5B88C2;
+}
+
+.followButton:hover{
+    background-color: #5B88C2;
+    color: white;
 }
