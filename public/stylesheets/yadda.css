@@ -97,9 +97,15 @@ main {
   background-color: white;
 }
 
-.navigationYadda,
 .logo {
-  padding-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  width: 137px;
+  height: 137px;
 }
 
 .navigationYadda ul {

@@ -181,8 +181,9 @@ router.get(
 //Timeline for specific tag
 router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
   let followTag = [req.query.tag];
-  let following = await handlerUser.findUserwithId(req.session.passport.user);
-  following = following.following;
+  let user = await handlerUser.findUserwithId(req.session.passport.user);
+  let following = user.following;
+  let avatarUser = await handlerAvatar.readAvatar({ _id: user.avatarId });
   let tags = await handlerTag.readTags();
   let avatars = await handlerAvatar.readAvatar();
   let yaddas = await handler.readYaddas({
@@ -218,6 +219,7 @@ router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
     title: 'YaddaYaddaYadda',
     tags: tags,
     avatars: avatars,
+    avatarUser: avatarUser[0],
     yaddas: yaddas,
     images: images,
     replies: '',

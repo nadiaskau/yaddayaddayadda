@@ -12,7 +12,7 @@ block content
     include error.pug
     div(class="column")
         div(class="logo")
-            img(src="../images/logo.png")
+            img(src="../images/logoSmaller.png")
         div(id="adds")
             h3 Adds
     div(id="yaddaContainer")
@@ -27,8 +27,12 @@ block content
                         input(type="text" name="tag" placeholder="Tag" required)
                     input(type="submit", value="Yadda" id="yaddaButton" class="button")
         div(id="timelineHeaders")
-            a(href="/" tabindex="1") Timeline
-            a(href="/timelineFollowed" tabindex="2") Followed
+            if(followed == true)
+                a(href="/" tabindex="1" id="timelineSelect" ) Timeline
+                a(href="/timelineFollowed" tabindex="2" id="followedSelect" style="color:blue") Followed
+            else 
+                a(href="/" tabindex="1" id="timelineSelect" style="color:blue" ) Timeline
+                a(href="/timelineFollowed" tabindex="2" id="followedSelect" ) Followed
         each yadda in yaddas 
             div(class="yadda" id=yadda.id)
                 div(class="avatar")
