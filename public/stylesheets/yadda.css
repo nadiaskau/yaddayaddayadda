@@ -205,18 +205,18 @@ main {
   padding: 5px 0 5px 0;
 }
 
-.users, .followButton{
-    margin-bottom: 0;
+.users {
+  margin-bottom: 0;
 }
 
-.followButton{
-    margin-right: 10px;
-    background-color: white;
-    border: 3px solid #5B88C2;
-    color: #5B88C2;
+.followButton {
+  margin: 0 10px 0 0;
+  background-color: white;
+  border: 3px solid #5b88c2;
+  color: #5b88c2;
 }
 
-.followButton:hover{
-    background-color: #5B88C2;
-    color: white;
+.followButton:hover {
+  background-color: #5b88c2;
+  color: white;
 }
