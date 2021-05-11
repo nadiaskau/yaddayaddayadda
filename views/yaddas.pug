@@ -95,9 +95,12 @@ block content
             div(id="followDiv")
                 h3 Follow
                 each user in users
-                    p(class="users") #{user.name}
-                    a(href="/users/follow?id=" + user.id)
+                    div(class="userFollow")
                         button(class="button") Follow
+                            a(href="/users/follow?id=" + user.id)
+                        p(class="users") #{user.name}
+                        
+                            
             div(id="trendDiv")           
                 h3 Trends
                 each tag in tags

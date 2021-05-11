@@ -197,3 +197,8 @@ main {
 
 .replies {
 }
+
+.userFollow {
+  display: flex;
+  align-items: center;
+}
