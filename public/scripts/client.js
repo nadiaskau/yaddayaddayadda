@@ -29,7 +29,6 @@ async function updateUserTheme(body) {
 
 //On page load
 async function init() {
-  timeline.addEventListener('click', selectTimeline);
   //let theme;
   let checked = document.getElementById('switch');
 
@@ -65,11 +64,4 @@ async function changeTheme() {
   updateUserTheme(body);
   //Refreshing our page
   window.location.href = '/';
-}
-
-let timeline = document.getElementById('timelineSelect');
-let followed = document.getElementById('followedSelect');
-
-function selectTimeline() {
-  timeline.style.color = 'blue';
 }

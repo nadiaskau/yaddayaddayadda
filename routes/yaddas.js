@@ -50,7 +50,7 @@ router.get('/', auth.ensureAuthenticated, async function (req, res) {
     replies: '',
     users: users,
     loggedin: true,
-    followed: false,
+    followed: 2,
   });
 });
 
@@ -108,7 +108,7 @@ router.get('/yadda', auth.ensureAuthenticated, async function (req, res, next) {
     replies: replies,
     users: users,
     loggedin: true,
-    followed: false,
+    followed: 2,
   });
 });
 
@@ -173,7 +173,7 @@ router.get(
       replies: '',
       users: users,
       loggedin: true,
-      followed: true,
+      followed: 1,
     });
   }
 );
@@ -225,6 +225,7 @@ router.get('/tag', auth.ensureAuthenticated, async function (req, res, next) {
     replies: '',
     users: users,
     loggedin: true,
+    followed: 0,
   });
 });
 
